@@ -1,11 +1,9 @@
-class ApplicationController < ActionController::Base
-  
+class UsersController < ApplicationController
   def spotify
     spotify_user = RSpotify::User.new(request.env['onmiauth.auth'])
     hash = spotify_user.to_hash
-     puts '*******************************'
+    puts '*******************************'
     puts "hash is" + hash
   end
 
-  protect_from_forgery with: :exception
 end
