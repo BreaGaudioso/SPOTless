@@ -4,8 +4,8 @@ Rails.application.configure do
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
   config.spoitfy_secrets = {
-    :client_id => Rails.application.secrets[:secret_client_id],
-    :client_secret => Rails.application.secrets[:secret_client_secret]
+    client_id: => ENV['client_id'],
+    client_secret: => ENV['client_secret']
 
   }
 
