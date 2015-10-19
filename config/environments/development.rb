@@ -3,13 +3,6 @@ Rails.application.configure do
 
   config.action_mailer.default_url_options = { host: 'localhost', port: 3000 }
 
-<<<<<<< HEAD
-  config.spoitfy_secrets = {
-    client_id: => ENV['client_id'],
-    client_secret: => ENV['client_secret']
-=======
->>>>>>> b5f1a1f10e4da104259710c3b888ed2348c0b39e
-
 
   # In the development environment your application's code is reloaded on
   # every request. This slows down response time but is perfect for development
