@@ -11,10 +11,55 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151019175011) do
+ActiveRecord::Schema.define(version: 20151019181112) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
+
+  create_table "album_artists", force: :cascade do |t|
+    t.integer  "artist_id"
+    t.integer  "album_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "albums", force: :cascade do |t|
+    t.integer  "spotify_album_id"
+    t.string   "image_url"
+    t.string   "name"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
+
+  create_table "artist_tracks", force: :cascade do |t|
+    t.integer  "artist_id"
+    t.integer  "track_id"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+  end
+
+  create_table "artists", force: :cascade do |t|
+    t.string   "name"
+    t.integer  "spotify_artist_id"
+    t.datetime "created_at",        null: false
+    t.datetime "updated_at",        null: false
+  end
+
+  create_table "playlists", force: :cascade do |t|
+    t.integer  "spotify_playlist_id"
+    t.string   "name"
+    t.integer  "user_id"
+    t.datetime "created_at",          null: false
+    t.datetime "updated_at",          null: false
+  end
+
+  create_table "tracks", force: :cascade do |t|
+    t.integer  "spotify_track_id"
+    t.integer  "album_id"
+    t.string   "name"
+    t.datetime "created_at",       null: false
+    t.datetime "updated_at",       null: false
+  end
 
   create_table "users", force: :cascade do |t|
     t.string   "spotify_user_id"
