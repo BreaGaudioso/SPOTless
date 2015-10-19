@@ -1,5 +1,9 @@
 source 'https://rubygems.org'
 
+<<<<<<< HEAD
+=======
+gem 'dotenv-rails', :groups => [:development, :test]
+>>>>>>> b5f1a1f10e4da104259710c3b888ed2348c0b39e
 # Bundle edge Rails instead: gem 'rails', github: 'rails/rails'
 gem 'rails', '4.2.4'
 # Use postgresql as the database for Active Record
@@ -42,10 +46,8 @@ group :development do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
-    
-  gem 'rspotify' 
+
+  gem 'rspotify'
   gem 'devise'
   gem 'omniauth'
-
 end
-
