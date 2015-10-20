@@ -16,31 +16,35 @@ class UsersController < ApplicationController
       if found_user
         session[:user_id] = found_user["id"]
         user_playlists.each do |playlist|
+
           if spotify_user.id == playlist.owner.id
             found_playlist = Playlist.where(spotify_playlist_id:playlist.id, name:playlist.name).first_or_create
+            PlaylistTrack.where(playlist_id: found_playlist.id).destroy_all
             found_user.playlists << found_playlist
             tracks = RSpotify::Playlist.find(found_user[:spotify_user_id], playlist.id)
             if tracks.total != 0
-              # testing = true
-              # if testing
-              #   light = RSpotify::Track.find('1k8K7Lyb9ubEzAkt6HQQu6')
-              #   puts tracks.inspect
-              #   puts "*" * 30
-              #   tracks.remove_tracks!([{track: light, positions: [0]}])
-              #   testing = false
-              # end
+              counter_index = 0
               tracks.tracks_cache.each do |track|
-                new_track = found_playlist.tracks.where(name:track.name, spotify_track_id:track.id).first_or_create
+                found_track = found_playlist.tracks.where(name:track.name, spotify_track_id:track.id).first
+                if found_track
+                  playlist_tracks = PlaylistTrack.where(track_id:found_track.id,playlist_id:found_playlist.id).first
+                  PlaylistTrack.update(playlist_tracks.id, {count:playlist_tracks.count + 1, positions:playlist_tracks.positions += ", #{counter_index}"})
+                else
+                  found_track = found_playlist.tracks.create(name:track.name, spotify_track_id:track.id)
+                  playlist_tracks = PlaylistTrack.where(track_id:found_track.id,playlist_id:found_playlist.id).first
+                  PlaylistTrack.update(playlist_tracks.id, {count:0, positions:"#{counter_index}"})
+                end
                 if track.album.images.size == 0
                   image = ""
                 else
                   image = track.album.images[0]['url']
                 end
-                new_album = Album.where(name:track.album.name, spotify_album_id:track.album.id, image_url:image).first_or_create
-                new_album.tracks << new_track
-                track.artists.each do |artist|
-                  new_artist = new_track.artists.where(name:artist.name, spotify_artist_id:artist.id).first_or_create
+                  new_album = Album.where(name:track.album.name, spotify_album_id:track.album.id, image_url:image).first_or_create
+                  new_album.tracks << found_track
+                  track.artists.each do |artist|
+                  new_artist = found_track.artists.where(name:artist.name, spotify_artist_id:artist.id).first_or_create
                 end
+                counter_index += 1
               end
             end
           end
