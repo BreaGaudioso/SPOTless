@@ -27,7 +27,9 @@ class UsersController < ApplicationController
   end
 
   def logout
+    res = Typhoeus.get("https://www.spotify.com/logout")
     sessions[:user_id] = nil
+    redirect_to :root
   end
 
 private
