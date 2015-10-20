@@ -19,7 +19,9 @@ class UsersController < ApplicationController
         user_playlists.each do |playlist|
           found_playlist = Playlist.where(spotify_playlist_id:playlist.id).first
           if found_playlist
+            if 
 
+            end
           else
             new_playlist = found_user.playlists.create(name:playlist.name, spotify_playlist_id:playlist.id)
             tracks = RSpotify::Playlist.find(found_user[:spotify_user_id], playlist.id)
