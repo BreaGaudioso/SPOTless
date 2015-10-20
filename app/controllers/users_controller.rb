@@ -7,12 +7,8 @@ class UsersController < ApplicationController
 
   def spotify
     spotify_user = RSpotify::User.new(request.env['omniauth.auth'])
-    data = spotify_user.playlists
-    data.each do |playlist|
-      puts playlist.id
-    end
-    # test2 = RSpotify::Playlist.find('donb91','10rjQcqX5eAW52R17NNYF0')
-    binding.pry
+    user_playlists = spotify_user.playlists
+
     hashToken = spotify_user.to_hash["credentials"]["token"]
     puts spotify_user.to_hash
     hashID = spotify_user.to_hash["id"]
@@ -20,7 +16,28 @@ class UsersController < ApplicationController
       found_user = User.where(spotify_user_id:hashID).first
       if found_user
         session[:user_id] = found_user["id"]
-        # get_spotify_data(found_user["id"])
+        user_playlists.each do |playlist|
+          found_playlist = Playlist.where(spotify_playlist_id:playlist.id).first
+          if found_playlist
+
+          else
+            new_playlists = found_user.playlists.create(name:playlist.name, spotify_playlist_id:playlist.id)
+            tracks = RSpotify::Playlist.find(found_user[:spotify_user_id], playlist.id)
+            if tracks.total != 0
+              tracks.tracks_cache.each do |track|
+                binding.pry
+                track = Track.create(name:track.name, spotify_track_id:track.id)
+                new_playlists << track
+                album = Album.create(name:track.album.name, spotify_album_id:track.album.id, image_url:track.album.images[0]['url'])
+                album << track
+                tracks.artists.each do |artist|
+                  new_artist = Artist.create(name:artist.name, spotify_artist_id:artist.id)
+                  track << new_artist
+                end
+              end
+            end
+          end
+        end
         redirect_to users_path
       else
         user = User.create( spotify_user_id:hashID, spotify_auth_token:hashToken )
@@ -47,13 +64,12 @@ class UsersController < ApplicationController
 
   def get_spotify_data(user_id)
     user = User.find user_id
+    # test2 = RSpotify::Playlist.find('donb91','10rjQcqX5eAW52R17NNYF0')
 
-    request = Typhoeus::Request.new(
-      "https://api.spotify.com/v1/users/#{user.spotify_user_id}/playlists",
-      method: :get,
-      params: { Authorization: "Bearer #{user.spotify_auth_token}" })
-    data = request.run
-    binding.pry
+    data = spotify_user.playlists
+    data.each do |playlist|
+      puts playlist.id
+    end
   end
 
 end
