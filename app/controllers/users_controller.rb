@@ -8,6 +8,7 @@ class UsersController < ApplicationController
   def spotify
     spotify_user = RSpotify::User.new(request.env['omniauth.auth'])
     hashToken = spotify_user.to_hash["credentials"]["token"]
+    puts spotify_user.to_hash
     hashID = spotify_user.to_hash["id"]
     if hashID.present? && hashToken.present?
       found_user = User.where(spotify_user_id:hashID).first
