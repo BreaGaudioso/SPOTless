@@ -7,11 +7,13 @@ class UsersController < ApplicationController
 
   def spotify
     spotify_user = RSpotify::User.new(request.env['omniauth.auth'])
+    
     hashToken = spotify_user.to_hash["credentials"]["token"]
     hashID = spotify_user.to_hash["id"]
     if hashID.present? && hashToken.present?
       found_user = User.where(spotify_user_id:hashID).first
       if found_user
+        getData(user.id)
         session[:user_id] = found_user["id"]
         redirect_to users_path
       else
@@ -32,7 +34,10 @@ class UsersController < ApplicationController
     redirect_to :root
   end
 
+
 private
+
+
 def user
   @user ||=current_user
 end
