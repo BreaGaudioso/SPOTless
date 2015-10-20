@@ -8,7 +8,6 @@ class UsersController < ApplicationController
   def spotify
     spotify_user = RSpotify::User.new(request.env['omniauth.auth'])
     user_playlists = spotify_user.playlists
-
     hashToken = spotify_user.to_hash["credentials"]["token"]
     hashID = spotify_user.to_hash["id"]
     if hashID.present? && hashToken.present?
@@ -19,11 +18,17 @@ class UsersController < ApplicationController
         user_playlists.each do |playlist|
           if spotify_user.id == playlist.owner.id
             found_playlist = Playlist.where(spotify_playlist_id:playlist.id, name:playlist.name).first_or_create
-            puts playlist.name
-            puts playlist.id
-            puts spotify_user.id
+            found_user.playlists << found_playlist
             tracks = RSpotify::Playlist.find(found_user[:spotify_user_id], playlist.id)
             if tracks.total != 0
+              # testing = true
+              # if testing
+              #   light = RSpotify::Track.find('1k8K7Lyb9ubEzAkt6HQQu6')
+              #   puts tracks.inspect
+              #   puts "*" * 30
+              #   tracks.remove_tracks!([{track: light, positions: [0]}])
+              #   testing = false
+              # end
               tracks.tracks_cache.each do |track|
                 new_track = found_playlist.tracks.where(name:track.name, spotify_track_id:track.id).first_or_create
                 if track.album.images.size == 0
