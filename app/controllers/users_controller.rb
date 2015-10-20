@@ -49,7 +49,6 @@ class UsersController < ApplicationController
 
   def get_spotify_data(user_id)
     user = User.find user_id
-    # test2 = RSpotify::Playlist.find('donb91','10rjQcqX5eAW52R17NNYF0')
 
     data = spotify_user.playlists
     data.each do |playlist|
