@@ -209,6 +209,7 @@ DEPENDENCIES
   dotenv-rails
   jbuilder (~> 2.0)
   jquery-rails
+  json
   omniauth
   pg
   pry-rails
