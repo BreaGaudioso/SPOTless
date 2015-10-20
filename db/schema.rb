@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20151019181112) do
+ActiveRecord::Schema.define(version: 20151020182347) do
 
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
@@ -24,11 +24,11 @@ ActiveRecord::Schema.define(version: 20151019181112) do
   end
 
   create_table "albums", force: :cascade do |t|
-    t.integer  "spotify_album_id"
     t.string   "image_url"
     t.string   "name"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.string   "spotify_album_id"
   end
 
   create_table "artist_tracks", force: :cascade do |t|
@@ -40,25 +40,25 @@ ActiveRecord::Schema.define(version: 20151019181112) do
 
   create_table "artists", force: :cascade do |t|
     t.string   "name"
-    t.integer  "spotify_artist_id"
     t.datetime "created_at",        null: false
     t.datetime "updated_at",        null: false
+    t.string   "spotify_artist_id"
   end
 
   create_table "playlists", force: :cascade do |t|
-    t.integer  "spotify_playlist_id"
     t.string   "name"
     t.integer  "user_id"
     t.datetime "created_at",          null: false
     t.datetime "updated_at",          null: false
+    t.string   "spotify_playlist_id"
   end
 
   create_table "tracks", force: :cascade do |t|
-    t.integer  "spotify_track_id"
     t.integer  "album_id"
     t.string   "name"
     t.datetime "created_at",       null: false
     t.datetime "updated_at",       null: false
+    t.string   "spotify_track_id"
   end
 
   create_table "users", force: :cascade do |t|
