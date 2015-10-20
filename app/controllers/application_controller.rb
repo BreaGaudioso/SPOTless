@@ -1,11 +1,18 @@
 class ApplicationController < ActionController::Base
-  
-  def spotify
-    spotify_user = RSpotify::User.new(request.env['onmiauth.auth'])
-    hash = spotify_user.to_hash
-     puts '*******************************'
-    puts "hash is" + hash
-  end
 
   protect_from_forgery with: :exception
+
+  def current_user
+    return unless session[:user_id]
+    @current_user ||=User.find_by_id(session[:user_id])
+  end
+    helper_method :current_user
+
+  def prevent_login_signup
+    if session[:user_id]
+      redirect_to :back
+      flash[:notice] = "You Are Still to Logged In"
+    end
+
+  end
 end
