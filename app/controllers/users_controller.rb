@@ -9,43 +9,29 @@ class UsersController < ApplicationController
     spotify_user = RSpotify::User.new(request.env['omniauth.auth'])
     user_playlists = spotify_user.playlists
     hashToken = spotify_user.to_hash["credentials"]["token"]
-    puts spotify_user.to_hash
     hashID = spotify_user.to_hash["id"]
     if hashID.present? && hashToken.present?
-      found_user = User.where(spotify_user_id:hashID).first
+      found_user = User.where(spotify_user_id:hashID, spotify_user_id:spotify_user.id).first_or_create
+      found_user.update_attributes(spotify_auth_token:hashToken)
       if found_user
         getData(user.id)
         session[:user_id] = found_user["id"]
         user_playlists.each do |playlist|
-          found_playlist = Playlist.where(spotify_playlist_id:playlist.id).first
-          if found_playlist
-            if 
-
-            end
-          else
-            new_playlist = found_user.playlists.create(name:playlist.name, spotify_playlist_id:playlist.id)
-            tracks = RSpotify::Playlist.find(found_user[:spotify_user_id], playlist.id)
-            if tracks.total != 0
-              tracks.tracks_cache.each do |track|
-                new_track = new_playlist.tracks.create(name:track.name, spotify_track_id:track.id)
-                new_album = Album.create(name:track.album.name, spotify_album_id:track.album.id, image_url:track.album.images[0]['url'])
-                new_album.tracks << new_track
-                track.artists.each do |artist|
-                  new_artist = new_track.artists.create(name:artist.name, spotify_artist_id:artist.id)
-                end
+        found_playlist = Playlist.where(spotify_playlist_id:playlist.id, name:playlist.name).first_or_create
+          tracks = RSpotify::Playlist.find(found_user[:spotify_user_id], playlist.id)
+          if tracks.total != 0
+            tracks.tracks_cache.each do |track|
+              new_track = found_playlist.tracks.where(name:track.name, spotify_track_id:track.id).first_or_create
+              new_album = Album.where(name:track.album.name, spotify_album_id:track.album.id, image_url:track.album.images[0]['url']).first_or_create
+              new_album.tracks << new_track
+              track.artists.each do |artist|
+                new_artist = new_track.artists.where(name:artist.name, spotify_artist_id:artist.id).first_or_create
               end
             end
           end
         end
+        session[:user_id] = user.id
         redirect_to users_path
-      else
-        user = User.create( spotify_user_id:hashID, spotify_auth_token:hashToken )
-        if user.save
-          session[:user_id] = user.id
-          redirect_to users_path
-        else
-          redirect_to users_path
-        end
       end
     end
   end
