@@ -48,4 +48,5 @@ group :development do
   gem 'rspotify'
   gem 'devise'
   gem 'omniauth'
+  gem 'json'
 end
