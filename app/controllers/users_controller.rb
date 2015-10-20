@@ -17,15 +17,25 @@ class UsersController < ApplicationController
       if found_user
         session[:user_id] = found_user["id"]
         user_playlists.each do |playlist|
-        found_playlist = Playlist.where(spotify_playlist_id:playlist.id, name:playlist.name).first_or_create
-          tracks = RSpotify::Playlist.find(found_user[:spotify_user_id], playlist.id)
-          if tracks.total != 0
-            tracks.tracks_cache.each do |track|
-              new_track = found_playlist.tracks.where(name:track.name, spotify_track_id:track.id).first_or_create
-              new_album = Album.where(name:track.album.name, spotify_album_id:track.album.id, image_url:track.album.images[0]['url']).first_or_create
-              new_album.tracks << new_track
-              track.artists.each do |artist|
-                new_artist = new_track.artists.where(name:artist.name, spotify_artist_id:artist.id).first_or_create
+          if spotify_user.id == playlist.owner.id
+            found_playlist = Playlist.where(spotify_playlist_id:playlist.id, name:playlist.name).first_or_create
+            puts playlist.name
+            puts playlist.id
+            puts spotify_user.id
+            tracks = RSpotify::Playlist.find(found_user[:spotify_user_id], playlist.id)
+            if tracks.total != 0
+              tracks.tracks_cache.each do |track|
+                new_track = found_playlist.tracks.where(name:track.name, spotify_track_id:track.id).first_or_create
+                if track.album.images.size == 0
+                  image = ""
+                else
+                  image = track.album.images[0]['url']
+                end
+                new_album = Album.where(name:track.album.name, spotify_album_id:track.album.id, image_url:image).first_or_create
+                new_album.tracks << new_track
+                track.artists.each do |artist|
+                  new_artist = new_track.artists.where(name:artist.name, spotify_artist_id:artist.id).first_or_create
+                end
               end
             end
           end
