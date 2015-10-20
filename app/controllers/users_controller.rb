@@ -9,6 +9,7 @@ class UsersController < ApplicationController
     spotify_user = RSpotify::User.new(request.env['omniauth.auth'])
     user_playlists = spotify_user.playlists
     hashToken = spotify_user.to_hash["credentials"]["token"]
+    puts spotify_user.to_hash
     hashID = spotify_user.to_hash["id"]
     if hashID.present? && hashToken.present?
       found_user = User.where(spotify_user_id:hashID).first
@@ -20,18 +21,15 @@ class UsersController < ApplicationController
           if found_playlist
 
           else
-            new_playlists = found_user.playlists.create(name:playlist.name, spotify_playlist_id:playlist.id)
+            new_playlist = found_user.playlists.create(name:playlist.name, spotify_playlist_id:playlist.id)
             tracks = RSpotify::Playlist.find(found_user[:spotify_user_id], playlist.id)
             if tracks.total != 0
               tracks.tracks_cache.each do |track|
+                new_track = new_playlist.tracks.create(name:track.name, spotify_track_id:track.id)
                 binding.pry
-                track = Track.create(name:track.name, spotify_track_id:track.id)
-                new_playlists << track
-                album = Album.create(name:track.album.name, spotify_album_id:track.album.id, image_url:track.album.images[0]['url'])
-                album << track
+                new_album = Album.create(name:track.album.name, spotify_album_id:track.album.id, image_url:track.album.images[0]['url'])
                 tracks.artists.each do |artist|
-                  new_artist = Artist.create(name:artist.name, spotify_artist_id:artist.id)
-                  track << new_artist
+                  new_artist = new_track.artist.create(name:artist.name, spotify_artist_id:artist.id)
                 end
               end
             end
