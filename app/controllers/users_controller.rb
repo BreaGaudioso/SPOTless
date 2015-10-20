@@ -26,10 +26,10 @@ class UsersController < ApplicationController
             if tracks.total != 0
               tracks.tracks_cache.each do |track|
                 new_track = new_playlist.tracks.create(name:track.name, spotify_track_id:track.id)
-                binding.pry
                 new_album = Album.create(name:track.album.name, spotify_album_id:track.album.id, image_url:track.album.images[0]['url'])
-                tracks.artists.each do |artist|
-                  new_artist = new_track.artist.create(name:artist.name, spotify_artist_id:artist.id)
+                new_album.tracks << new_track
+                track.artists.each do |artist|
+                  new_artist = new_track.artists.create(name:artist.name, spotify_artist_id:artist.id)
                 end
               end
             end
