@@ -16,7 +16,6 @@ class UsersController < ApplicationController
       if found_user
         session[:user_id] = found_user["id"]
         user_playlists.each do |playlist|
-
           if spotify_user.id == playlist.owner.id
             found_playlist = Playlist.where(spotify_playlist_id:playlist.id, name:playlist.name).first_or_create
             PlaylistTrack.where(playlist_id: found_playlist.id).destroy_all
@@ -27,8 +26,8 @@ class UsersController < ApplicationController
               tracks.tracks_cache.each do |track|
                 found_track = found_playlist.tracks.where(name:track.name, spotify_track_id:track.id).first
                 if found_track
-                  playlist_tracks = PlaylistTrack.where(track_id:found_track.id,playlist_id:found_playlist.id).first
-                  PlaylistTrack.update(playlist_tracks.id, {count:playlist_tracks.count + 1, positions:playlist_tracks.positions += ", #{counter_index}"})
+                  playlist_tracks = PlaylistTrack.where(track_id:found_track.id,playlist_id:found_playlist.id).last
+                  PlaylistTrack.create(track_id:found_track.id,playlist_id:found_playlist.id,positions:counter_index,count:playlist_tracks.count + 1)
                 else
                   found_track = found_playlist.tracks.create(name:track.name, spotify_track_id:track.id)
                   playlist_tracks = PlaylistTrack.where(track_id:found_track.id,playlist_id:found_playlist.id).first
