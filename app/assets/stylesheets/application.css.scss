@@ -37,17 +37,23 @@
   position: fixed;
   top: 0px;
   background-color: black;
-  color: #999;
+  color: #777;
   padding-top: 10px;
   height: 100vh;
   .nav-username {
     text-align: center;
-    font-size: 1.1em
+    font-size: 1.2em;
+    color: #777;
   }
   .nav-header {
     padding: 15px 10px;
+    color: #777;
   }
   li {
     border-bottom: 1px solid white;
   }
+}
+
+.table {
+  padding-right: 20px;
 }
