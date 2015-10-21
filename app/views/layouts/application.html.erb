@@ -11,29 +11,32 @@
 
 </head>
 <header>
-  <div class="container">
-    <div class="row">
-      <% if current_user %>
-        <%= link_to 'Sign Out', logout_path%> |  <%= link_to 'Home', users_path%>
-      <% else %>
-       <%= link_to 'Sign In', login_path%>
-      <% end %>
-    </div>
-  </div>
-
 </header>
 <body>
+
   <div class="cotainer">
     <div class="row">
-      <% flash.each do |key, value| %>
-        <% if key == "alert" %>
-          <%= content_tag :div, value, class: "text-center alert alert-danger" %>
-        <% else %>
-          <%= content_tag :div, value, class: "text-center alert alert-success" %>
+      <% if @user %>
+        <nav class='col-sm-2'>
+          <ul class="nav nav-pills nav-stacked">
+            <li class='nav-username'><%=@user.spotify_user_id.titlecase%></li>
+            <li>Your playlist</li>
+            <% @user.playlists.each do |playlist| %>
+              <li>
+                <%=link_to playlist.name, playlist_path(playlist)%>
+              </li>
+            <% end %>
+          </ul>
+        </nav>
         <% end %>
-      <% end %>
-      <div class="col-sm-12">
-
+      <div class="col-sm-10">
+        <% flash.each do |key, value| %>
+          <% if key == "alert" %>
+            <%= content_tag :div, value, class: "text-center alert alert-danger" %>
+          <% else %>
+            <%= content_tag :div, value, class: "text-center alert alert-success" %>
+          <% end %>
+        <% end %>
         <%= yield %>
       </div>
     </div>
