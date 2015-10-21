@@ -65,8 +65,8 @@ class UsersController < ApplicationController
                   new_album = Album.where(name:track.album.name, spotify_album_id:track.album.id, image_url:image).first_or_create
                   new_album.tracks << found_track
                   track.artists.each do |artist|
-                  new_artist = found_track.artists.where(name:artist.name, spotify_artist_id:artist.id).first_or_create
-                end
+                    new_artist = found_track.artists.where(name:artist.name, spotify_artist_id:artist.id).first_or_create
+                  end
                 counter_index += 1
               end
             end
