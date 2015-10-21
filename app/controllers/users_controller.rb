@@ -24,6 +24,7 @@ class UsersController < ApplicationController
             if tracks.total != 0
               counter_index = 0
               tracks.tracks_cache.each do |track|
+                binding.pry
                 found_track = found_playlist.tracks.where(name:track.name, spotify_track_id:track.id).first
                 if found_track
                   playlist_tracks = PlaylistTrack.where(track_id:found_track.id,playlist_id:found_playlist.id).last
