@@ -1,16 +1,38 @@
-// Example using 'Cerulean' bootswatch
-
-//Import bootstrap-sprockets
-@import "bootstrap-sprockets";
-
-// Import cerulean variables
-@import "bootswatch/cerulean/variables";
+// Example using bootswatch
+//
+// First import  variables
+@import "bootswatch/journal/variables";
 
 // Then bootstrap itself
 @import "bootstrap";
 
-// Bootstrap body padding for fixed navbar
-body { padding-top: 60px; }
-
 // And finally bootswatch style itself
-@import "bootswatch/cerulean/bootswatch";
+@import "bootswatch/journal/bootswatch";
+
+// If you want to import your own styles just use 
+
+// @import "name_of_scss file"
+
+// Here are the free themes you can use:
+
+// Amelia
+// Cerulean
+// Cosmo
+// Cyborg
+// Darkly
+// Flatly
+// Journal
+// Lumen
+// Paper
+// Readable
+// Sandstone
+// Simplex
+// Slate
+// Spacelab
+// Superhero
+// United
+// Yeti
+
+
+
+
