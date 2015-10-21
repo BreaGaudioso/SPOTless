@@ -1,0 +1,21 @@
+
+  <table class="table table-hover">
+    <thead>
+      <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Count</th>
+        <th>Postion</th>
+      </tr>
+    </thead>
+    <tbody>
+      <tr>
+        <% @playlist.tracks.each do |track| %>
+          <th scope="row"><%= track.id %></th>
+          <td><%= track.name%></td>
+          <td>4</td>
+          <td>5</td>
+        <% end %>
+      </tr>
+    </tbody>
+  </table>

@@ -5,10 +5,45 @@
   <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
   <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
   <%= csrf_meta_tags %>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap-theme.min.css">
+  <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
+
 </head>
+<header>
+  <div class="row">
+    <div class="container">
+      <div class="col ">
+
+      </div>
+      <% if current_user %>
+        <%= link_to 'Sign Out', logout_path%> |  <%= link_to 'Home', users_path%>
+      <% else %>
+       <%= link_to 'Sign In', login_path%>
+      <% end %>
+    </div>
+  </div>
+
+</header>
 <body>
-
-<%= yield %>
-
+  <div class="row">
+    <div class="cotainer">
+      <% flash.each do |key, value| %>
+        <% if key == "alert" %>
+          <%= content_tag :div, value, class: "text-center alert alert-danger" %>
+        <% else %>
+          <%= content_tag :div, value, class: "text-center alert alert-success" %>
+        <% end %>
+      <% end %>
+      <%= yield %>
+    </div>
+  </div>
 </body>
+<script type="text/javascript">
+  $(function() {
+    setTimeout(function() {
+        $(".alert").hide()
+    }, 3000);
+  });
+</script>
 </html>

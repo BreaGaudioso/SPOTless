@@ -14,7 +14,6 @@ class UsersController < ApplicationController
       found_user = User.where(spotify_user_id:hashID, spotify_user_id:spotify_user.id).first_or_create
       found_user.update_attributes(spotify_auth_token:hashToken)
       if found_user
-        getData(user.id)
         session[:user_id] = found_user["id"]
         user_playlists.each do |playlist|
           if spotify_user.id == playlist.owner.id
@@ -50,16 +49,12 @@ class UsersController < ApplicationController
           end
         end
         session[:user_id] = user.id
+        flash[:sucess] = 'Signed In'
         redirect_to users_path
       end
     end
   end
 
-  def logout
-    res = Typhoeus.get("https://www.spotify.com/logout")
-    session[:user_id] = nil
-    redirect_to :root
-  end
 
 
   private
@@ -67,14 +62,7 @@ class UsersController < ApplicationController
     @user ||=current_user
   end
 
-  def get_spotify_data(user_id)
-    user = User.find user_id
 
-    data = spotify_user.playlists
-    data.each do |playlist|
-      puts playlist.id
-    end
-  end
 
 
 end
