@@ -19,23 +19,32 @@ class UsersController < ApplicationController
         user_playlists.each do |playlist|
           if spotify_user.id == playlist.owner.id
             found_playlist = Playlist.where(spotify_playlist_id:playlist.id, name:playlist.name).first_or_create
-            puts playlist.name
-            puts playlist.id
-            puts spotify_user.id
+            PlaylistTrack.where(playlist_id: found_playlist.id).destroy_all
+            found_user.playlists << found_playlist
             tracks = RSpotify::Playlist.find(found_user[:spotify_user_id], playlist.id)
             if tracks.total != 0
+              counter_index = 0
               tracks.tracks_cache.each do |track|
-                new_track = found_playlist.tracks.where(name:track.name, spotify_track_id:track.id).first_or_create
+                found_track = found_playlist.tracks.where(name:track.name, spotify_track_id:track.id).first
+                if found_track
+                  playlist_tracks = PlaylistTrack.where(track_id:found_track.id,playlist_id:found_playlist.id).last
+                  PlaylistTrack.create(track_id:found_track.id,playlist_id:found_playlist.id,positions:counter_index,count:playlist_tracks.count + 1)
+                else
+                  found_track = found_playlist.tracks.create(name:track.name, spotify_track_id:track.id)
+                  playlist_tracks = PlaylistTrack.where(track_id:found_track.id,playlist_id:found_playlist.id).first
+                  PlaylistTrack.update(playlist_tracks.id, {count:0, positions:"#{counter_index}"})
+                end
                 if track.album.images.size == 0
                   image = ""
                 else
                   image = track.album.images[0]['url']
                 end
-                new_album = Album.where(name:track.album.name, spotify_album_id:track.album.id, image_url:image).first_or_create
-                new_album.tracks << new_track
-                track.artists.each do |artist|
-                  new_artist = new_track.artists.where(name:artist.name, spotify_artist_id:artist.id).first_or_create
+                  new_album = Album.where(name:track.album.name, spotify_album_id:track.album.id, image_url:image).first_or_create
+                  new_album.tracks << found_track
+                  track.artists.each do |artist|
+                  new_artist = found_track.artists.where(name:artist.name, spotify_artist_id:artist.id).first_or_create
                 end
+                counter_index += 1
               end
             end
           end
@@ -60,7 +69,6 @@ class UsersController < ApplicationController
 
   def get_spotify_data(user_id)
     user = User.find user_id
-    # test2 = RSpotify::Playlist.find('donb91','10rjQcqX5eAW52R17NNYF0')
 
     data = spotify_user.playlists
     data.each do |playlist|
