@@ -44,9 +44,12 @@ group :development do
 
   # Spring speeds up development by keeping your application running in the background. Read more: https://github.com/rails/spring
   gem 'spring'
-  
+  gem 'oauth'
+  gem 'json'
   gem 'rspotify'
   gem 'devise'
   gem 'omniauth'
-  gem 'json'
+  gem 'bootstrap-sass', '~> 3.2.0'
+  gem 'bootswatch-rails'
+  
 end

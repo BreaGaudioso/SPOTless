@@ -50,29 +50,20 @@ class UsersController < ApplicationController
           end
         end
         session[:user_id] = user.id
+        flash[:sucess] = 'Signed In'
         redirect_to users_path
       end
     end
   end
 
-  def logout
-    res = Typhoeus.get("https://www.spotify.com/logout")
-    session[:user_id] = nil
-    redirect_to :root
-  end
+
 
   private
   def user
     @user ||=current_user
   end
 
-  def get_spotify_data(user_id)
-    user = User.find user_id
 
-    data = spotify_user.playlists
-    data.each do |playlist|
-      puts playlist.id
-    end
-  end
+
 
 end
