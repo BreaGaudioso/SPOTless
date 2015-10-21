@@ -17,7 +17,7 @@ class UsersController < ApplicationController
         session[:user_id] = found_user["id"]
         user_playlists.each do |playlist|
           if spotify_user.id == playlist.owner.id
-            found_playlist = Playlist.where(spotify_playlist_id:playlist.id, name:playlist.name).first_or_create
+            found_playlist = Playlist.where(spotify_playlist_id:playlist.id, name:playlist.name, snap_shot_id:playlist.snapshot_id).first_or_create
             PlaylistTrack.where(playlist_id: found_playlist.id).destroy_all
             found_user.playlists << found_playlist
             tracks = RSpotify::Playlist.find(found_user[:spotify_user_id], playlist.id)

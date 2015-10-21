@@ -9,15 +9,17 @@
       </tr>
     </thead>
     <tbody>
-      <% @playlist.tracks.each do |track| %>
-        <% track.playlist_tracks.each do |playlist_track| %>
+      <% i = 1 %>
+      <% @areplaylist.playlist_tracks.each do |track| %>
         <tr>
-          <th scope="row"><%= track.id %></th>
-          <td><%= track.name%></td>
-          <td><%= playlist_track.copies%></td>
-          <td><%= playlist_track.positions%></td>
+          <th scope="row"><%= i %></th>
+          <td><%= track.track.name%></td>
+          <td><%= track.copies%></td>
+          <td><%= track.positions%></td>
         </tr>
-        <% end %>
+        <% i += 1 %>
       <% end %>
     </tbody>
   </table>
+
+  <%= link_to 'Remove Duplicates', playlist_path, method: 'delete'  %>

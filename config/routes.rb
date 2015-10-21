@@ -4,5 +4,5 @@ Rails.application.routes.draw do
   get 'logout', to: 'sessions#logout', as: 'logout'
   get 'auth/spotify/callback', to: 'users#spotify'
   resources :users, only: ['index']
-  resources :playlists, only: ['show', 'edit']
+  resources :playlists, only: ['show', 'edit', 'destroy']
 end

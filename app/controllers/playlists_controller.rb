@@ -1,7 +1,21 @@
 class PlaylistsController < ApplicationController
   def show
-    @playlist = playlist
+    @areplaylist = areplaylist
 
+  end
+
+  def destroy
+    p_id = areplaylist.spotify_playlist_id
+    u_id = current_user.spotify_user_id
+    s_id = areplaylist.snap_shot_id
+    playlist = RSpotify::Playlist.find(u_id, p_id)
+    positionsArray = areplaylist.playlist_tracks.where("copies > 0")
+    positions = positionsArray.pluck(:positions).map(&:to_i)
+    positionsArray.each do |song|
+      song.destroy
+    end
+    playlist.remove_tracks!(positions, snapshot_id:s_id)
+    redirect_to users_path
   end
 
 private
@@ -9,8 +23,8 @@ private
     @user ||=current_user
   end
 
-  def playlist
-    @playlist ||= Playlist.find(params[:id])
+  def areplaylist
+    @areplaylist ||= Playlist.find(params[:id])
   end
 
 end
