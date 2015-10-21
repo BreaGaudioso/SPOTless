@@ -14,3 +14,13 @@
 //= require jquery_ujs
 //= require turbolinks
 //= require_tree .
+
+$(function() {
+  setTimeout(function() {
+    $('.alert').hide();
+  }, 3000);
+
+  $('.glyphicon-list').on('click', function(event) {
+    $('nav').slideToggle('slow');
+  });
+});

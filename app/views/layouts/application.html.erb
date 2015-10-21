@@ -13,11 +13,10 @@
 <header>
 </header>
 <body>
-
   <div class="cotainer">
     <div class="row">
       <% if @current_user %>
-        <nav class='col-sm-2'>
+        <nav class='col-lg-2 col-m-10 hidden-xs hidden-sm'>
           <ul class="nav nav-pills nav-stacked">
             <h5 class='nav-username'><%=@user.spotify_user_id.titlecase%></h5>
             <li class='nav-header'>Playlists</li>
@@ -28,9 +27,9 @@
             <% end %>
           </ul>
         </nav>
-        <div class="col-sm-10">
+        <div class="col-lg-10 col-m-10">
       <% else %>
-          <div class="col-sm-12">
+        <div class="col-m-12">
       <% end %>
         <% flash.each do |key, value| %>
           <% if key == "alert" %>
@@ -45,10 +44,6 @@
   </div>
 </body>
 <script type="text/javascript">
-  $(function() {
-    setTimeout(function() {
-        $(".alert").hide()
-    }, 3000);
-  });
+
 </script>
 </html>
