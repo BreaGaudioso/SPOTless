@@ -24,15 +24,14 @@ class UsersController < ApplicationController
             if tracks.total != 0
               counter_index = 0
               tracks.tracks_cache.each do |track|
-                binding.pry
                 found_track = found_playlist.tracks.where(name:track.name, spotify_track_id:track.id).first
                 if found_track
                   playlist_tracks = PlaylistTrack.where(track_id:found_track.id,playlist_id:found_playlist.id).last
-                  PlaylistTrack.create(track_id:found_track.id,playlist_id:found_playlist.id,positions:counter_index,count:playlist_tracks.count + 1)
+                  PlaylistTrack.create(track_id:found_track.id,playlist_id:found_playlist.id,positions:counter_index,copies:playlist_tracks.copies + 1)
                 else
                   found_track = found_playlist.tracks.create(name:track.name, spotify_track_id:track.id)
                   playlist_tracks = PlaylistTrack.where(track_id:found_track.id,playlist_id:found_playlist.id).first
-                  PlaylistTrack.update(playlist_tracks.id, {count:0, positions:"#{counter_index}"})
+                  PlaylistTrack.update(playlist_tracks.id, {copies:0, positions:"#{counter_index}"})
                 end
                 if track.album.images.size == 0
                   image = ""

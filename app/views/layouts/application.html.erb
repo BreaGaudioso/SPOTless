@@ -13,9 +13,6 @@
 <header>
   <div class="container">
     <div class="row">
-      <div class="col ">
-
-      </div>
       <% if current_user %>
         <%= link_to 'Sign Out', logout_path%> |  <%= link_to 'Home', users_path%>
       <% else %>
@@ -35,7 +32,10 @@
           <%= content_tag :div, value, class: "text-center alert alert-success" %>
         <% end %>
       <% end %>
-      <%= yield %>
+      <div class="col-sm-12">
+
+        <%= yield %>
+      </div>
     </div>
   </div>
 </body>
