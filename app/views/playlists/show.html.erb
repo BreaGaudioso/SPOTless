@@ -8,13 +8,15 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <% @playlist.tracks.each do |track| %>
+      <% @playlist.tracks.each do |track| %>
+        <% track.playlist_tracks.each do |playlist_track| %>
+        <tr>
           <th scope="row"><%= track.id %></th>
           <td><%= track.name%></td>
-          <td>4</td>
-          <td>5</td>
+          <td><%= playlist_track.copies%></td>
+          <td><%= playlist_track.positions%></td>
+        </tr>
         <% end %>
-      </tr>
+      <% end %>
     </tbody>
   </table>
