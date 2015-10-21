@@ -9,13 +9,13 @@
       </tr>
     </thead>
     <tbody>
-      <tr>
-        <% @playlist.tracks.each do |track| %>
+      <% @playlist.tracks.each do |track| %>
+        <tr>
           <th scope="row"><%= track.id %></th>
-          <td><%= track.name%></td>
-          <td>4</td>
+          <td><%= track.playlist_tracks.copies%></td>
+          <td><%= track.playlist_tracks.positions%></td>
           <td>5</td>
-        <% end %>
-      </tr>
+        </tr>
+      <% end %>
     </tbody>
   </table>

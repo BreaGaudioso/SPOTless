@@ -1,6 +1,5 @@
 class PlaylistsController < ApplicationController
   def show
-    binding.pry
     @playlist = playlist
 
   end
