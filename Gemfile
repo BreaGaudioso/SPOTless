@@ -51,5 +51,4 @@ group :development do
   gem 'omniauth'
   gem 'bootstrap-sass', '~> 3.2.0'
   gem 'bootswatch-rails'
-  
 end

@@ -1,7 +1,7 @@
 class PlaylistsController < ApplicationController
   def show
     @areplaylist = areplaylist
-
+    @user = user
   end
 
   def destroy
@@ -26,5 +26,4 @@ private
   def areplaylist
     @areplaylist ||= Playlist.find(params[:id])
   end
-
 end

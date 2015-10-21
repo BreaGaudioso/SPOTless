@@ -9,7 +9,7 @@
 // And finally bootswatch style itself
 @import "bootswatch/journal/bootswatch";
 
-// If you want to import your own styles just use 
+// If you want to import your own styles just use
 
 // @import "name_of_scss file"
 
@@ -33,6 +33,26 @@
 // United
 // Yeti
 
+.nav {
+  position: fixed;
+  top: 0px;
+  background-color: black;
+  color: #777;
+  padding-top: 10px;
+  height: 100vh;
+  .nav-username {
+    text-align: center;
+    font-size: 1.2em;
+    color: #777;
+  }
+  .nav-header {
+    padding: 15px 10px;
+    color: #777;
+  }
+  li {
+    border-bottom: 1px solid white;
+  }
+}
 
 
-
+.top-buffer { margin-top:20px; }
