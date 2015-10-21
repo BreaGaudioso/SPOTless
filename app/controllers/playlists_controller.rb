@@ -1,7 +1,7 @@
 class PlaylistsController < ApplicationController
   def show
     @playlist = playlist
-
+    @user = user
   end
 
 private
@@ -12,5 +12,4 @@ private
   def playlist
     @playlist ||= Playlist.find(params[:id])
   end
-
 end

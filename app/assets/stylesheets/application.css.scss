@@ -33,10 +33,21 @@
 // United
 // Yeti
 
-nav {
-  margin-top: 10px;
+.nav {
+  position: fixed;
+  top: 0px;
+  background-color: black;
+  color: #999;
+  padding-top: 10px;
+  height: 100vh;
   .nav-username {
     text-align: center;
     font-size: 1.1em
+  }
+  .nav-header {
+    padding: 15px 10px;
+  }
+  li {
+    border-bottom: 1px solid white;
   }
 }

@@ -16,11 +16,11 @@
 
   <div class="cotainer">
     <div class="row">
-      <% if @user %>
+      <% if @current_user %>
         <nav class='col-sm-2'>
           <ul class="nav nav-pills nav-stacked">
-            <li class='nav-username'><%=@user.spotify_user_id.titlecase%></li>
-            <li>Your playlist</li>
+            <h5 class='nav-username'><%=@user.spotify_user_id.titlecase%></h5>
+            <li class='nav-header'>Playlists</li>
             <% @user.playlists.each do |playlist| %>
               <li>
                 <%=link_to playlist.name, playlist_path(playlist)%>
@@ -28,8 +28,10 @@
             <% end %>
           </ul>
         </nav>
-        <% end %>
-      <div class="col-sm-10">
+        <div class="col-sm-10">
+      <% else %>
+          <div class="col-sm-12">
+      <% end %>
         <% flash.each do |key, value| %>
           <% if key == "alert" %>
             <%= content_tag :div, value, class: "text-center alert alert-danger" %>

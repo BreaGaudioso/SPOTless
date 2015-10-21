@@ -2,7 +2,7 @@ class UsersController < ApplicationController
   # before_action :prevent_login_signup
 
   def index
-    @user = user
+    user
   end
 
   def spotify
@@ -48,7 +48,7 @@ class UsersController < ApplicationController
             end
           end
         end
-        session[:user_id] = user.id
+        session[:user_id] = found_user.id
         flash[:sucess] = 'Signed In'
         redirect_to users_path
       end
