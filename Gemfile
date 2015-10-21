@@ -46,9 +46,10 @@ group :development do
   gem 'spring'
   gem 'oauth'
   gem 'json'
-
   gem 'rspotify'
   gem 'devise'
   gem 'omniauth'
-  gem 'json'
+  gem 'bootstrap-sass', '~> 3.2.0'
+  gem 'bootswatch-rails'
+  
 end
