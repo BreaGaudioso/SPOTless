@@ -61,11 +61,15 @@ class UsersController < ApplicationController
                 else
                   image = track.album.images[0]['url']
                 end
-                  #find or create new album and adds track to album
-                  new_album = Album.where(name:track.album.name, spotify_album_id:track.album.id, image_url:image).first_or_create
+                #find or create new album and adds track to album
+                new_album = Album.where(name:track.album.name, spotify_album_id:track.album.id, image_url:image).first_or_create
+                binding.pry
+                track_present = new_album.tracks.where(id:found_track.id).first
+                if !track_present
                   new_album.tracks << found_track
                   track.artists.each do |artist|
-                  new_artist = found_track.artists.where(name:artist.name, spotify_artist_id:artist.id).first_or_create
+                    found_track.artists.where(name:artist.name, spotify_artist_id:artist.id).first_or_create
+                  end
                 end
                 counter_index += 1
               end
