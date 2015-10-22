@@ -15,7 +15,7 @@ class PlaylistsController < ApplicationController
       song.destroy
     end
     playlist.remove_tracks!(positions, snapshot_id:s_id)
-    redirect_to users_path
+    redirect_to user_path(@areplaylist.user.id)
   end
 
 private
