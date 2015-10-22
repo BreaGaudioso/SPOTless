@@ -40,6 +40,7 @@
   color: #777;
   padding-top: 10px;
   height: 100vh;
+  overflow-y: scroll;
   .nav-username {
     text-align: center;
     font-size: 1.2em;
@@ -93,12 +94,23 @@
 
 }
 
+.logout {
+  background-color: #639000;
+  font-size: .8em;
+  border-radius: 35%;
+}
+
 .col-centered{
   float: none;
   margin: 0 auto;
 }
 
-.top-buffer { 
-  margin-top:200px; 
-  margin-bottom:100px;
+.top-buffer {
+  margin-top:210px;
+  margin-bottom:230px;
+}
+
+.bottom-buffer {
+  margin-top:210px;
+  margin-bottom:300px;
 }
