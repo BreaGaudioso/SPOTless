@@ -74,7 +74,7 @@
     width: auto;
     height: auto;
     z-index: -100;
-    -webkit-filter: blur(2px) grayscale(.8) opacity(0.6);
+    -webkit-filter: blur(2px) grayscale(1) opacity(0.6);
     -webkit-transform: translateX(-50%) translateY(-50%);
     transform: translateX(-50%) translateY(-50%);
     background-size: cover;
@@ -127,3 +127,6 @@
 }
 
  
+tr:nth-child(even) {
+    background-color: rgba(132, 189, 0, .7);
+} 
