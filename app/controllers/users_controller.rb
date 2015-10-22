@@ -12,7 +12,7 @@ class UsersController < ApplicationController
   def spotify
     # get spotify account
     spotify_user = RSpotify::User.new(request.env['omniauth.auth'])
-    user_playlists = spotify_user.playlists
+    user_playlists = spotify_user.playlists(limit: 50, offset:0)
     hashToken = spotify_user.to_hash["credentials"]["token"]
     hashID = spotify_user.to_hash["id"]
     #makes sure we have a vaild user back from spotify
