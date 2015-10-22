@@ -5,7 +5,7 @@ class UsersController < ApplicationController
     user
   end
 
-  def spotify
+def spotify
     spotify_user = RSpotify::User.new(request.env['omniauth.auth'])
     user_playlists = spotify_user.playlists
     hashToken = spotify_user.to_hash["credentials"]["token"]
@@ -54,7 +54,6 @@ class UsersController < ApplicationController
       end
     end
   end
-
 
 
   private
