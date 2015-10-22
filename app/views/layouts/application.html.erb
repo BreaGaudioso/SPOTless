@@ -19,11 +19,13 @@
           <ul class="nav nav-pills nav-stacked col-sm-2">
             <h5 class='nav-username'><%=@user.spotify_user_id.titlecase%></h5>
             <li class='nav-header'>Playlists</li>
-            <% @user.playlists.each do |playlist| %>
-              <li>
-                <%=link_to playlist.name, playlist_path(playlist)%>
-              </li>
-            <% end %>
+            <div class="collapsible-body">
+              <% @user.playlists.each do |playlist| %>
+                <li>
+                  <%=link_to playlist.name, playlist_path(playlist)%>
+                </li>
+              <% end %>
+            </div>
           </ul>
         </nav>
         <div class="col-sm-10">

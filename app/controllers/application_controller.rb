@@ -13,6 +13,5 @@ class ApplicationController < ActionController::Base
       redirect_to :back
       flash[:notice] = "You Are Still to Logged In"
     end
-
   end
 end
