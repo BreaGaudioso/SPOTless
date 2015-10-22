@@ -5,7 +5,7 @@ class SessionsController < ApplicationController
   def logout
     res = Typhoeus.get("https://www.spotify.com/logout")
     session[:user_id] = nil
-    flash[:sucess] = 'Singed Out'
+    flash[:sucess] = 'Signed Out'
     redirect_to :root
   end
 
