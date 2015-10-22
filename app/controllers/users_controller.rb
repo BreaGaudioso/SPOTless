@@ -63,7 +63,6 @@ class UsersController < ApplicationController
                 end
                 #find or create new album and adds track to album
                 new_album = Album.where(name:track.album.name, spotify_album_id:track.album.id, image_url:image).first_or_create
-                binding.pry
                 track_present = new_album.tracks.where(id:found_track.id).first
                 if !track_present
                   new_album.tracks << found_track
