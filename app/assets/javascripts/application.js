@@ -25,7 +25,7 @@ $(function() {
   $(".for-dups").click(function() {
     $(this).css("background-color", "rgba(132, 189, 0, .3)");
     $(".for-all").css("background-color", "black");
-    $(".dup").show("slow");
+    $(".dup").toggle("slow");
     $(".all").slideUp();
   });
 
@@ -33,7 +33,7 @@ $(function() {
     $(this).css("background-color", "rgba(132, 189, 0, .3)");
     $(".for-dups").css("background-color", "black");
     $(".dup").slideUp();
-    $(".all").show("slow");
+    $(".all").toggle("slow");
   });
 
   $('.glyphicon-list').on('click', function(event) {
