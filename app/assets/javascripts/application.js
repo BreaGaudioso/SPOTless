@@ -19,7 +19,6 @@ $(function() {
     $('.alert').hide();
   }, 3000);
 
-  $(".dup").hide();
   $(".all").hide();
 
   $(".for-dups").click(function() {
