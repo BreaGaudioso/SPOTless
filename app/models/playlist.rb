@@ -10,6 +10,6 @@ class Playlist < ActiveRecord::Base
         return true
       end
     end
-    false
+    return false
   end
 end
