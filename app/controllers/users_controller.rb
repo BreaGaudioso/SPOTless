@@ -14,6 +14,7 @@ class UsersController < ApplicationController
     found_user.update_attributes(spotify_auth_token:request.env['omniauth.auth'].credentials.token)
     offset = 0
     spotifty_user_playlist = get_users_playlist(offset);
+
     while spotifty_user_playlist['total'] >= 50 + offset
       offset += 50
       spotifty_user_playlist['items'].concat get_users_playlist(offset)['items']
