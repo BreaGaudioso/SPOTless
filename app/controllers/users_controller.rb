@@ -14,19 +14,19 @@ class UsersController < ApplicationController
     found_user.update_attributes(spotify_auth_token:request.env['omniauth.auth'].credentials.token)
     offset = 0
     spotifty_user_playlist = get_users_playlist(offset);
-    while spotifty_user_playlist['total'] >= 50 + offset
-      # offset += 50
-      spotifty_user_playlist['items'].concat get_users_playlist(offset)['items']
-    end
+    # while spotifty_user_playlist['total'] >= 50 + offset
+    #   offset += 50
+    #   spotifty_user_playlist['items'].concat get_users_playlist(offset)['items']
+    # end
 
     spotifty_user_playlist['items'].each do |playlist|
       offset = 0
       found_playlist = found_user.playlists.where(name:playlist['name'],spotify_playlist_id:playlist['id'],snap_shot_id:playlist['snapshot_id']).first_or_create
       spotifty_playlist_tracks = get_playlist_tracks(offset, playlist['id'])
-      while spotifty_playlist_tracks['tracks']['total'] >= 100 + offset
-        offset += 100
-        spotifty_playlist_tracks.concat get_playlist_tracks(offset)
-      end
+      # while spotifty_playlist_tracks['tracks']['total'] >= 100 + offset
+      #   offset += 100
+      #   spotify_playlist_tracks['tracks']['items'] = spotifty_playlist_tracks['tracks']['items'].concat get_playlist_tracks(offset, playlist['id'])['tracks']['items']
+      # end
       spotifty_playlist_tracks['tracks']['items'].each do |track|
         found_track = found_playlist.tracks.where(name:track['track']['name'],spotify_track_id:track['track']['id']).first_or_create
         track['track']['artists'].each do |artist|
@@ -34,8 +34,11 @@ class UsersController < ApplicationController
           found_track.artists << found_artist unless found_track.artists.where(id:found_artist.id).first
           found_album = Album.where(name:track['track']['album']['name'], spotify_album_id:track['track']['album']['id']).first_or_create
           found_album.tracks << found_track unless found_album.tracks.where(id:found_track.id).first
-          image = ''
-          image = track['track']['album']['images'][0]['url'] if track['track']['album']['images'][0]['url']
+          if track['track']['album']['images'].size != 0
+            image = track['track']['album']['images'][0]['url']
+          else
+            image = ''
+          end
           found_album.update_attributes(image_url: image)
           found_artist.albums << found_album unless found_artist.albums.where(id:found_album.id).first
         end
