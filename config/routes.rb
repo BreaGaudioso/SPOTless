@@ -5,5 +5,6 @@
   get 'auth/spotify/callback', to: 'users#spotify'
   get 'loading', to: 'application#loading'
   resources :users, only: ['show']
-  resources :playlists, only: ['show', 'edit', 'destroy']
+  resources :playlists, only: ['show', 'edit', 'destroy', 'destroy_all']
+
 end

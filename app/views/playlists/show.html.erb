@@ -1,26 +1,31 @@
-  <table class="table table-hover" id="content">
-    <thead>
-      <tr>
-        <th>ID</th>
-        <th>Name</th>
-        <th>Count</th>
-        <th>Postion</th>
-      </tr>
-    </thead>
-    <tbody>
-      <% i = 1 %>
-      <% @areplaylist.playlist_tracks.each do |track| %>
-        <tr>
-          <th scope="row"><%= i %></th>
-          <td><%= track.track.name%></td>
-          <td><%= track.copies%></td>
-          <td><%= track.positions%></td>
-        </tr>
-        <% i += 1 %>
-      <% end %>
-    </tbody>
-  </table>
+  <div class = "row">
+    <div class = 'col-xs-4 col-centered text-center' id='greyback'>
+      <h3 class="text-muted content"><%= link_to 'Remove Duplicates', playlist_path, method: 'delete'  %></h3>
+  </div>
+</div>
 
- <h4 class="text-muted" id='content'><%= link_to 'Remove Duplicates', playlist_path, method: 'delete'  %></h4>
+
+  <div class = "row">
+    <div class = 'col-xs-6 col-centered'>
+      <table class="table table-hover text-right">
+        <thead class= 'text-right'>
+          <tr>
+            <th> </th>
+            <th>Name</th>
+          </tr>
+        </thead>
+        <tbody>
+          <% i = 1 %>
+          <% @areplaylist.playlist_tracks.each do |track| %>
+            <tr>
+              <th scope="row"><%= i %></th>
+              <td><%= track.track.name%></td>
+            </tr>
+            <% i += 1 %>
+          <% end %>
+        </tbody>
+      </table>
+    </div>
+  </div>
 
 

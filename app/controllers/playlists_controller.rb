@@ -23,6 +23,7 @@ private
     @user ||=current_user
   end
 
+
   def areplaylist
     @areplaylist ||= Playlist.find(params[:id])
   end

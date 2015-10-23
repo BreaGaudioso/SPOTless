@@ -9,6 +9,8 @@ class UsersController < ApplicationController
     user
   end
 
+
+
   def spotify
     if request.env['omniauth.auth'].info.display_name.present?
       userName = request.env['omniauth.auth'].info.display_name
