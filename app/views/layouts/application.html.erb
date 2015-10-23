@@ -17,18 +17,9 @@
         <ul class="nav nav-pills nav-stacked col-sm-2">
           <h5 class='nav-username'><%=@user.spotify_user_id.titlecase%></h5>
           <li class='nav-header for-dups'>Duplicate Playlists</li>
-            <li class="dup">
-              fdsfdsfds
-            </li>
-            <li class="dup">
-              fdsfdsfdsfds
-            </li>
-            <li class="dup">
-              fdsfdsfdsfd
-            </li>
             <% @user.playlists.each do |playlist| %>
-            <% if playlist.has_dup%>
-              <li id="dup">
+            <% if playlist.has_dup %>
+              <li class="dup">
                 <%=link_to playlist.name, playlist_path(playlist)%>
               </li>
               <% end %>

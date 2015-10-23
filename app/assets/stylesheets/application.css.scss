@@ -129,7 +129,7 @@
 
  
 tr:nth-child(even){
-    background-color: rgba(132, 189, 0, .4);
+    background-color: rgba(132, 189, 0, .2);
 } 
 
 a {
@@ -142,4 +142,18 @@ a:hover {
 }
 
 
+tr {
+width: 100%;
+display: inline-table;
+}
 
+table{
+ height:300px; 
+ color: rgba(34,34,34,0.75);
+}
+tbody{
+  overflow-y: scroll;
+  height: 500px;
+  width: 90%;
+  position: absolute;
+}
