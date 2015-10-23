@@ -64,7 +64,6 @@
   padding: 0px;
 }
 
-
 #background {
     position: fixed;
     top: 50%;
@@ -89,6 +88,12 @@
   border-radius: 7px;
 }
 
+#greyback{
+  background: rgba(34,34,34,0.75);
+  padding: 5px;
+  margin-top: 10px;
+  border-radius: 7px;
+}
 
 #content-last{
   margin-top: 30px;
@@ -127,4 +132,20 @@ a {
 a:hover {
     background-color: rgba(34,34,34,0.75);
     color: rgba(132, 189, 0, .7);
+}
+tr {
+width: 100%;
+display: inline-table;
+}
+
+table{
+ height:300px;
+ color: rgba(34,34,34,0.75);
+}
+
+tbody{
+  overflow-y: scroll;
+  height: 150%;
+  width: 90%;
+  position: absolute;
 }

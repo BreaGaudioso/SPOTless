@@ -21,6 +21,7 @@ class UsersController < ApplicationController
       offset += 50
       spotifty_user_playlist['items'].concat get_users_playlist(offset)['items']
     end
+
     spotifty_user_playlist['items'].each do |playlist|
       offset = 0
       found_playlist = found_user.playlists.where(name:playlist['name'],spotify_playlist_id:playlist['id'],snap_shot_id:playlist['snapshot_id']).first_or_create

@@ -23,14 +23,14 @@ $(function() {
   $(".all").hide();
 
   $(".for-dups").click(function() {
-    $(this).css("background-color", "rgba(132, 189, 0, .3)");
+    // $(this).css("background-color", "rgba(132, 189, 0, .3)");
     $(".for-all").css("background-color", "black");
     $(".dup").toggle("slow");
     $(".all").slideUp();
   });
 
   $(".for-all").click(function() {
-    $(this).css("background-color", "rgba(132, 189, 0, .3)");
+    // $(this).css("background-color", "rgba(132, 189, 0, .3)");
     $(".for-dups").css("background-color", "black");
     $(".dup").slideUp();
     $(".all").toggle("slow");
