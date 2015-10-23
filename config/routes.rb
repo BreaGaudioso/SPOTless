@@ -4,7 +4,7 @@
   get 'logout', to: 'sessions#logout', as: 'logout'
   get 'auth/spotify/callback', to: 'users#spotify'
   get 'loading', to: 'application#loading'
-  resources :users, only: ['show']
-  resources :playlists, only: ['show', 'edit', 'destroy', 'destroy_all']
+  resources :users, only: ['show', 'destroy']
+  resources :playlists, only: ['show', 'edit', 'destroy']
 
 end
