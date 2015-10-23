@@ -17,7 +17,17 @@
         <ul class="nav nav-pills nav-stacked col-sm-2">
           <h5 class='nav-username'><%=@user.spotify_user_id.titlecase%></h5>
           <%= link_to 'Logout', logout_path, class:'btn btn-default logout col-sm-10 col-sm-offset-1' %>
-          <li class='nav-header'>Duplicate Playlists</li>
+          <li class='nav-header for-dups'>Duplicate Playlists</li>
+            <li class="dup">
+              fdsfdsfds
+            </li>
+            <li class="dup">
+              fdsfdsfdsfds
+            </li>
+            <li class="dup">
+              fdsfdsfdsfd
+            </li>
+
             <% @user.playlists.each do |playlist| %>
             <% if playlist.has_dup%>
               <li id="dup">
@@ -26,9 +36,9 @@
               <% end %>
             <% end %>
 
-            <li class='nav-header'>All Playlists</li>
+            <li class='nav-header for-all'>All Playlists</li>
             <% @user.playlists.each do |p| %>
-            <li id="all">
+            <li class="all">
               <%= link_to p.name, playlist_path(p) %>
             </li>
             <%end %>

@@ -20,6 +20,20 @@ $(function() {
     $('.alert').hide();
   }, 3000);
 
+$(".for-dups").click(function() {
+  $(this).css("background-color", "rgba(132, 189, 0, .3)");
+  $(".for-all").css("background-color", "black");
+  $(".dup").show("slow");
+  $(".all").slideUp();
+});
+
+$(".for-all").click(function() {
+  $(this).css("background-color", "rgba(132, 189, 0, .3)");
+  $(".for-dups").css("background-color", "black");
+  $(".dup").slideUp();
+  $(".all").show("slow");
+});
+
   $('.glyphicon-list').on('click', function(event) {
     $('nav').slideToggle('slow');
   });
