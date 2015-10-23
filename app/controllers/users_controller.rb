@@ -21,15 +21,12 @@ class UsersController < ApplicationController
     end
     hashToken = spotify_user.to_hash["credentials"]["token"]
     hashID = spotify_user.to_hash["id"]
-<<<<<<< HEAD
     binding.pry
     if spotify_user.display_name.present?
       displayName = spotify_user.display_name.present?
     else
       displayName = spotify_user.id
     end
-=======
->>>>>>> f60793c856ae2713003318abab37cf17ca516dab
     #makes sure we have a vaild user back from spotify
     if hashID.present? && hashToken.present?
       #finds or creates a user by spotify id
