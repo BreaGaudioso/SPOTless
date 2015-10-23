@@ -2,8 +2,8 @@
 <html>
   <head>
     <title>SpotlessApp</title>
-      <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-      <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+      <%= stylesheet_link_tag    'application', media: 'all'%>
+      <%= javascript_include_tag 'application'%>
       <%= csrf_meta_tags %>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
@@ -17,6 +17,15 @@
           <h5 class='nav-username'><%=@user.spotify_user_id.titlecase%></h5>
           <%= link_to image_tag("/logoutbutton.png"), logout_path, class:'btn btn-default logout col-sm-10 col-sm-offset-1' %>
           <li class='nav-header'>Duplicate Playlists</li>
+            <li class="dup">
+              fdsfdsfds
+            </li>
+            <li class="dup">
+              fdsfdsfdsfds
+            </li>
+            <li class="dup">
+              fdsfdsfdsfd
+            </li>
             <% @user.playlists.each do |playlist| %>
             <% if playlist.has_dup%>
               <li id="dup">
@@ -25,9 +34,9 @@
               <% end %>
             <% end %>
 
-            <li class='nav-header'>All Playlists</li>
+            <li class='nav-header for-all'>All Playlists</li>
             <% @user.playlists.each do |p| %>
-            <li id="all">
+            <li class="all">
               <%= link_to p.name, playlist_path(p) %>
             </li>
             <%end %>
@@ -51,7 +60,6 @@
         </div>
   </body>
 <script type="text/javascript">
-
 </script>
 <img id="background" src="http://static.wixstatic.com/media/b7bdbe_5b043fe23d5c40d795ae587fd4cb44d7.jpg_srb_p_989_660_75_22_0.50_1.20_0.00_jpg_srb">
 
