@@ -1,57 +1,58 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>SpotlessApp</title>
-    <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
-    <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
-    <%= csrf_meta_tags %>
-
+  <head>
+    <title>SpotlessApp</title>
+      <%= stylesheet_link_tag    'application', media: 'all', 'data-turbolinks-track' => true %>
+      <%= javascript_include_tag 'application', 'data-turbolinks-track' => true %>
+      <%= csrf_meta_tags %>
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.0/jquery.min.js"></script>
   <script src="js/bootstrap.min.js"></script>
-</head>
-<header>
-</header>
-<body>
-  <div class="cotainer">
-    <div class="row">
-      <% if @current_user %>
-        <nav class='col-sm-2 hidden-xs'>
-          <ul class="nav nav-pills nav-stacked col-sm-2">
-            <h5 class='nav-username'><%=@user.username.titlecase%></h5>
-            <%= link_to 'Logout', logout_path, class:'btn btn-default logout col-sm-10 col-sm-offset-1' %>
-            <li class='nav-header'>Duplicate Playlists</li>
+  </head>
+  <header>
+  </header>
+  <body>
+    <% if @current_user %>
+      <nav class='col-sm-2 hidden-xs'>
+        <ul class="nav nav-pills nav-stacked col-sm-2">
+          <h5 class='nav-username'><%=@user.spotify_user_id.titlecase%></h5>
+          <%= link_to 'Logout', logout_path, class:'btn btn-default logout col-sm-10 col-sm-offset-1' %>
+          <li class='nav-header'>Duplicate Playlists</li>
             <% @user.playlists.each do |playlist| %>
-              <% if playlist.has_dup%>
-                <li>
-                  <%=link_to playlist.name, playlist_path(playlist)%>
-                </li>
+            <% if playlist.has_dup%>
+              <li id="dup">
+                <%=link_to playlist.name, playlist_path(playlist)%>
+              </li>
               <% end %>
             <% end %>
+
             <li class='nav-header'>All Playlists</li>
             <% @user.playlists.each do |p| %>
-            <li>
+            <li id="all">
               <%= link_to p.name, playlist_path(p) %>
             </li>
             <%end %>
           </ul>
         </nav>
+      </div>
         <div class="col-sm-10">
       <% else %>
         <div class="col-sm-12">
       <% end %>
-        <% flash.each do |key, value| %>
-          <% if key == "alert" %>
-            <%= content_tag :div, value, class: "text-center alert alert-danger" %>
-          <% else %>
-            <%= content_tag :div, value, class: "text-center alert alert-success" %>
+      <div class="container">
+        <div class="row">
+          <% flash.each do |key, value| %>
+            <% if key == "alert" %>
+              <%= content_tag :div, value, class: "text-center alert alert-danger" %>
+            <% else %>
+              <%= content_tag :div, value, class: "text-center alert alert-success" %>
+            <% end %>
           <% end %>
-        <% end %>
-        <%= yield %>
-    </div>
-  </div>
-</body>
+          <%= yield %>
+        </div>
+  </body>
 <script type="text/javascript">
 
 </script>
+<img id="background" src="http://static.wixstatic.com/media/b7bdbe_5b043fe23d5c40d795ae587fd4cb44d7.jpg_srb_p_989_660_75_22_0.50_1.20_0.00_jpg_srb">
 
 </html>

@@ -16,16 +16,20 @@ class UsersController < ApplicationController
     user_playlists = spotify_user.playlists(limit: 50, offset: offset)
     while user_playlists.size == 50 + offset
       offset += 50
+      binding.pry
       user_playlists.concat spotify_user.playlists(limit: limit, offset: offset)
     end
     hashToken = spotify_user.to_hash["credentials"]["token"]
     hashID = spotify_user.to_hash["id"]
+<<<<<<< HEAD
     binding.pry
     if spotify_user.display_name.present?
       displayName = spotify_user.display_name.present?
     else
       displayName = spotify_user.id
     end
+=======
+>>>>>>> f60793c856ae2713003318abab37cf17ca516dab
     #makes sure we have a vaild user back from spotify
     if hashID.present? && hashToken.present?
       #finds or creates a user by spotify id
