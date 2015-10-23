@@ -15,7 +15,7 @@ class UsersController < ApplicationController
     offset = 0
     spotifty_user_playlist = get_users_playlist(offset);
     while spotifty_user_playlist['total'] >= 50 + offset
-      offset += 50
+      # offset += 50
       spotifty_user_playlist['items'].concat get_users_playlist(offset)['items']
     end
 
@@ -109,7 +109,6 @@ class UsersController < ApplicationController
     #
     #       end
     #     end
-
     #   end
     # end
     session[:user_id] = found_user.id

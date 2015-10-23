@@ -33,12 +33,15 @@
 // United
 // Yeti
 
+
+
 .nav {
   position: fixed;
   top: 0px;
   background-color: black;
   color: #777;
   padding-top: 10px;
+  padding-left: 0px;
   height: 100vh;
   overflow-y: scroll;
   .nav-username {
@@ -46,14 +49,21 @@
     font-size: 1.2em;
     color: #777;
   }
+
   .nav-header {
     padding: 15px 10px;
     color: #777;
   }
+
   li {
     border-bottom: 1px solid white;
   }
 }
+
+.hidden-xs{
+  padding: 0px;
+}
+
 
 #background {
     position: fixed;
@@ -64,7 +74,7 @@
     width: auto;
     height: auto;
     z-index: -100;
-    -webkit-filter: blur(2px) grayscale(1) opacity(0.8);
+    -webkit-filter: blur(2px) grayscale(.8) opacity(0.6);
     -webkit-transform: translateX(-50%) translateY(-50%);
     transform: translateX(-50%) translateY(-50%);
     background-size: cover;
@@ -76,8 +86,10 @@
   margin-right:60px;
   background: rgba(34,34,34,0.75);
   padding: 10px;
-  padding-bottom:20px;
+  padding-bottom:30px;
+  border-radius: 7px;
 }
+
 
 #content-last{
   margin-top: 30px;
@@ -114,3 +126,10 @@
   margin-top:210px;
   margin-bottom:300px;
 }
+
+ 
+tr:nth-child(even){
+    background-color: rgba(132, 189, 0, .7);
+} 
+
+

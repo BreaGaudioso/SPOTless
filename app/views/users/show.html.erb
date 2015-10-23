@@ -1,13 +1,11 @@
-<h1>Home</h1>
-<%= @user['spotify_user_id'] %>
-<%= @user['id'] %>
-
 </br></br>
-<h4>User Playlists</h4>
-<ul>
-  <% @user.playlists.each do |playlist| %>
-    <li>
-      <%=link_to playlist.name, playlist_path(playlist)%>
-    </li>
-  <% end %>
-</ul>
+<div class="row top-buffer">
+  <div class='col-lg-6 col-centered text-center'>
+    <div id='content'>
+  <h2 class='text-muted'>Welcome</h2>
+  <h4 class='text-muted' >Choose a playlist to get started</h4>
+  <h4 class='text-muted'> or </h4>
+  <h4 class='text-muted'> <button class="button-bg"> DELETE ALL DUPLICATES FROM YOUR PLAYLISTS </button> </h4>
+  </div>
+</div>
+</div>
