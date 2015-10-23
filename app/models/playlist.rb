@@ -5,11 +5,12 @@ class Playlist < ActiveRecord::Base
   has_many :tracks, through: :playlist_tracks
 
   def has_dup
-    self.playlist_tracks do |playlist_track|
+    puts self.playlist_tracks.size
+    self.playlist_tracks.each do |playlist_track|
       if playlist_track.copies > 0
         return true
       end
     end
-    false
+    return false
   end
 end
