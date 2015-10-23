@@ -19,6 +19,9 @@ $(function() {
     $('.alert').hide();
   }, 3000);
 
+  $(".for-dups").css("background-color", "rgba(132, 189, 0, .3)");
+  $(".all").hide();
+
   $(".for-dups").click(function() {
     $(this).css("background-color", "rgba(132, 189, 0, .3)");
     $(".for-all").css("background-color", "black");
