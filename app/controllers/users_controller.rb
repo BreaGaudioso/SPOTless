@@ -9,6 +9,8 @@ class UsersController < ApplicationController
     user
   end
 
+
+
   def spotify
     found_user = User.where(spotify_user_id:request.env['omniauth.auth'].info.id).first_or_create
     found_user.update_attributes(spotify_auth_token:request.env['omniauth.auth'].credentials.token)
