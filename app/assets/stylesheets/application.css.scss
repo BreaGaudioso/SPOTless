@@ -69,7 +69,6 @@
     transform: translateX(-50%) translateY(-50%);
     background-size: cover;
 }
-
 #content{
   margin-top: 40px;
   margin-left:30px;
@@ -78,38 +77,32 @@
   padding: 10px;
   padding-bottom:20px;
 }
-
 #content-last{
   margin-top: 30px;
   padding:5px;
   margin-left:30px;
   margin-right:30px;
 }
-
 #screen {
-  height: 80%;
-  width: 80%;
+  height: 100%;
+  width: 100%;
   padding: 20px;
   margin-top:10px;
-
 }
-
 .logout {
   background-color: #639000;
   font-size: .8em;
-  border-radius: 35%;
+  padding: 8px 35px 6px;
+  border-radius: 100%;
 }
-
 .col-centered{
   float: none;
   margin: 0 auto;
 }
-
 .top-buffer {
   margin-top:210px;
   margin-bottom:230px;
 }
-
 .bottom-buffer {
   margin-top:210px;
   margin-bottom:300px;
