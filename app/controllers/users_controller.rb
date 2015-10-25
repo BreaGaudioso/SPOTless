@@ -17,7 +17,7 @@ class UsersController < ApplicationController
       userName = request.env['omniauth.auth'].info.id
     end
     found_user.update_attributes(spotify_auth_token:request.env['omniauth.auth'].credentials.token, username:userName)
-    PlaylistRequest.perform_async(found_user.id)
+    # PlaylistRequest.perform_async(found_user.id)
     session[:user_id] = found_user.id
     flash[:sucsess] = 'Signed In'
     redirect_to user_path(found_user)
