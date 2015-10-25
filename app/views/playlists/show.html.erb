@@ -1,31 +1,35 @@
-  <div class = "row">
-    <div class = 'col-xs-4 col-centered text-center' id='greyback'>
-      <h3 class="text-muted content"><%= link_to 'Remove Duplicates', playlist_path, method: 'delete'  %></h3>
+<div class = "row">
+  <div class = 'col-xs-4 col-centered text-center' id='greyback'>
+    <h3 class="text-muted content"><%= link_to 'Remove Duplicates', playlist_path, method: 'delete'  %></h3>
   </div>
 </div>
-
-
-  <div class = "row">
-    <div class = 'col-xs-6 col-centered'>
-      <table class="table table-hover text-right">
-        <thead class= 'text-right'>
+<div class = "row">
+  <div class = 'col-xs-10 col-centered'>
+    <table class="table table-hover text-left">
+      <thead class= 'text-left'>
+        <tr>
+          <th class='tableIndex'></th>
+          <th>Name</th>
+          <th>Alubm</th>
+          <th>Artist</th>
+        </tr>
+      </thead>
+      <tbody>
+        <% i = 1 %>
+        <% @areplaylist.playlist_tracks.each do |track| %>
           <tr>
-            <th> </th>
-            <th>Name</th>
+            <td class='tableIndex'><%= i %></td>
+            <td class='tableTrackName'><%= track.track.name%></td>
+            <td class='tableArtistName'>
+              <%track.track.artists.each do |artist| %>
+                <%=artist.name%>
+              <% end %>
+            </td>
+            <td class='tableAlbumName'><%= track.track.album.name%></td>
           </tr>
-        </thead>
-        <tbody>
-          <% i = 1 %>
-          <% @areplaylist.playlist_tracks.each do |track| %>
-            <tr>
-              <th scope="row"><%= i %></th>
-              <td><%= track.track.name%></td>
-            </tr>
-            <% i += 1 %>
-          <% end %>
-        </tbody>
-      </table>
-    </div>
+          <% i += 1 %>
+        <% end %>
+      </tbody>
+    </table>
   </div>
-
-
+</div>
