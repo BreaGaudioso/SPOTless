@@ -10,7 +10,8 @@ class UsersController < ApplicationController
   end
 
   def spotify
-    found_user = User.where(spotify_user_id:request.env['omniauth.auth'].info.id).first_or_create
+    found_user = User.all.first
+    # found_user = User.where(spotify_user_id:request.env['omniauth.auth'].info.id).first_or_create
     # if request.env['omniauth.auth'].info.display_name.present?
     #   userName = request.env['omniauth.auth'].info.display_name
     # else
