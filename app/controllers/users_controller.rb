@@ -12,7 +12,6 @@ class UsersController < ApplicationController
 
   def destroy
     areplaylists.each do |areplaylist|
-      binding.pry
       p_id = areplaylist.spotify_playlist_id
       u_id = current_user.spotify_user_id
       s_id = areplaylist.snap_shot_id
@@ -24,7 +23,7 @@ class UsersController < ApplicationController
       end
       playlist.remove_tracks!(positions, snapshot_id:s_id)
     end
-    redirect_to user_path(@areplaylist.user.id)
+    redirect_to user_path(current_user)
   end
 
   def spotify
