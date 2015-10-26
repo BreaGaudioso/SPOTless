@@ -32,6 +32,7 @@ gem 'rspotify'
 gem 'devise'
 gem 'omniauth'
 gem 'fuzzy-string-match'
+gem 'sinatra', :require => nil
 # Use Unicorn as the app server
 # gem 'unicorn'
 

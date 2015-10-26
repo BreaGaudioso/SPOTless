@@ -1,4 +1,7 @@
   Rails.application.routes.draw do
+  require 'sidekiq/web'
+  mount Sidekiq::Web => '/sidekiq'
+
   root 'sessions#login'
   get 'login', to: 'sessions#login', as: 'login'
   get 'logout', to: 'sessions#logout', as: 'logout'
