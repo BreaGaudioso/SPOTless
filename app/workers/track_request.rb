@@ -11,8 +11,10 @@ class TrackRequest
       spotifty_playlist_tracks['items'] = spotifty_playlist_tracks['items'].concat get_playlist_tracks(offset,found_user.spotify_user_id, found_user.spotify_auth_token, found_playlist.spotify_playlist_id)['items']
     end
     if spotifty_playlist_tracks['total'] != 0
-      counter_index = 0
+      counter_index = -1
       spotifty_playlist_tracks['items'].each do |track|
+        counter_index += 1
+        puts counter_index
         found_track = found_playlist.tracks.where(name:track['track']['name'],spotify_track_id:track['track']['id']).first
         if found_track
           playlist_tracks = PlaylistTrack.where(track_id:found_track.id,playlist_id:playlist_id).last
@@ -37,6 +39,7 @@ class TrackRequest
           found_album.update_attributes(image_url: image)
           found_artist.albums << found_album unless found_artist.albums.where(id:found_album.id).first
         end
+
       end
     end
   end

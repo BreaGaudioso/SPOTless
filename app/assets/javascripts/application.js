@@ -17,27 +17,17 @@
 $(function() {
   setTimeout(function() {
     $('.alert').hide();
-  }, 3000);
-
-  $(".all").hide();
-
-  $(".for-dups").click(function() {
-    // $(this).css("background-color", "rgba(132, 189, 0, .3)");
-    $(".for-all").css("background-color", "black");
-    $(".dup").toggle("slow");
-    $(".all").slideUp();
-  });
-
-  $(".for-all").click(function() {
-    // $(this).css("background-color", "rgba(132, 189, 0, .3)");
-    $(".for-dups").css("background-color", "black");
-    $(".dup").slideUp();
-    $(".all").toggle("slow");
-  });
-
-  $('.glyphicon-list').on('click', function(event) {
-    $('nav').slideToggle('slow');
-  });
+  }, 3000
+  );
 });
 
+$(window).scroll(function() {
+  var scroll = $(window).scrollTop();
+  $('.logo-container').css(
+    {'opacity': ((1000 - (scroll * 2)) / 1000)}
+  );
+});
 
+$(document).ready(function() {
+  $('.button-collapse').sideNav();
+});
