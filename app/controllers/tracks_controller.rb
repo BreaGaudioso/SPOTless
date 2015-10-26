@@ -32,7 +32,6 @@ require 'rspotify'
     positionsArray = areplaylist.playlist_tracks.where(track_id:t_id)
     positions = positionsArray.pluck(:positions).map(&:to_i)
     playlist.remove_tracks!(positions, snapshot_id:s_id)
-    Post.find_each { |post| Post.reset_counters(song.id, :positions) }
     positionsArray.each do |song|
       song.destroy
     end
