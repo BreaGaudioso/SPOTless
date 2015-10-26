@@ -16,7 +16,7 @@ class TrackRequest
         found_track = found_playlist.tracks.where(name:track['track']['name'],spotify_track_id:track['track']['id']).first
         if found_track
           playlist_tracks = PlaylistTrack.where(track_id:found_track.id,playlist_id:playlist_id).last
-          PlaylistTrack.create(track_id:found_track.id, playlist_id:playlist_id, positions:playlist_tracks.count, copies:playlist_tracks.copies + 1 )
+          PlaylistTrack.create(track_id:found_track.id, playlist_id:playlist_id, positions:counter_index, copies:playlist_tracks.copies + 1 )
         else
           found_track = Track.where(spotify_track_id:track['track']['id']).first
           if found_track
@@ -25,7 +25,7 @@ class TrackRequest
             found_track = found_playlist.tracks.create(name:track['track']['name'], spotify_track_id:track['track']['id'])
           end
           playlist_tracks = PlaylistTrack.where(track_id:found_track.id,playlist_id:found_playlist.id).first
-          PlaylistTrack.update(playlist_tracks.id, {copies:0, positions:playlist_tracks.copies})
+          PlaylistTrack.update(playlist_tracks.id, {copies:0, positions:counter_index})
         end
         track['track']['artists'].each do |artist|
           found_artist = Artist.where(name:artist['name'], spotify_artist_id:artist['id']).first_or_create
