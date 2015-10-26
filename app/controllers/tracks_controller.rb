@@ -1,5 +1,4 @@
 class TracksController < ApplicationController
-require 'fuzzystringmatch'
 require 'rspotify/oauth'
 require 'rspotify'
 
