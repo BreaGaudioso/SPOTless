@@ -7,6 +7,8 @@ class UsersController < ApplicationController
 
   def show
     user
+    @user
+    binding.pry
   end
 
   def destroy
@@ -40,7 +42,7 @@ class UsersController < ApplicationController
     redirect_to user_path(found_user)
   end
 
-  private
+private
   def user
     @user ||=current_user
   end

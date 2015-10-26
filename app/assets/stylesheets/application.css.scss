@@ -1,151 +1,67 @@
-// Example using bootswatch
-//
-// First import  variables
-@import "bootswatch/journal/variables";
-
-// Then bootstrap itself
-@import "bootstrap";
-
-// And finally bootswatch style itself
-@import "bootswatch/journal/bootswatch";
-
-// If you want to import your own styles just use
-
-// @import "name_of_scss file"
-
-// Here are the free themes you can use:
-
-// Amelia
-// Cerulean
-// Cosmo
-// Cyborg
-// Darkly
-// Flatly
-// Journal
-// Lumen
-// Paper
-// Readable
-// Sandstone
-// Simplex
-// Slate
-// Spacelab
-// Superhero
-// United
-// Yeti
 
 
+/* ============================================================
+  Login
+============================================================ */
+.login-page {
+    background: RGBA(0, 0, 0, 1);
+}
 
-.nav {
-  position: fixed;
-  top: 0px;
-  background-color: black;
-  color: #777;
-  padding-top: 10px;
-  padding-left: 0px;
+#login-background {
+  background: url("http://wallpapers.wallhaven.cc/wallpapers/full/wallhaven-45557.jpg");
+  background-position: bottom;
   height: 100vh;
-  overflow-y: scroll;
-  .nav-username {
-    text-align: center;
-    font-size: 1.2em;
-    color: #777;
-  }
-
-  .nav-header {
-    padding: 15px 10px;
-    color: #777;
-  }
-
-  li {
-    border-bottom: 1px solid white;
-  }
+  width: 100%;
+  background-repeat: no-repeat;
+  background-size: cover;
 }
-
-.hidden-xs{
-  padding: 0px;
-}
-
-#background {
-    position: fixed;
-    top: 50%;
-    left: 50%;
-    min-width: 100%;
-    min-height: 100%;
-    width: auto;
-    height: auto;
-    z-index: -100;
-    -webkit-filter: blur(2px) grayscale(.8) opacity(0.6);
-    -webkit-transform: translateX(-50%) translateY(-50%);
-    transform: translateX(-50%) translateY(-50%);
-    background-size: cover;
-}
-#content{
-  margin-top: 40px;
-  margin-left:30px;
-  margin-right:60px;
-  background: rgba(34,34,34,0.75);
-  padding: 10px;
-  padding-bottom:30px;
-  border-radius: 7px;
-}
-
-#greyback{
-  background: rgba(34,34,34,0.75);
-  padding: 5px;
-  margin-top: 10px;
-  border-radius: 7px;
-}
-
-#content-last{
-  margin-top: 30px;
-  padding:5px;
-  margin-left:30px;
-  margin-right:30px;
+.login-content {
+  color: RGBA(255, 255, 255, 1);
+  background: RGBA(0, 0, 0, 1);
+  padding: 0 20% 5% 20%;
+  text-align: left;
+  top: 100vh;
+  font-family: 'Poiret One', cursive;
 }
 #screen {
   height: 100%;
   width: 100%;
-  padding: 20px;
-  margin-top:10px;
 }
-.logout {
-  background-color: black;
-  font-size: .8em;
+.line-center{
+  margin:0;padding:0 10px;
+  background:RGBA(0, 0, 0, 1);
+  color: RGBA(255, 255, 255, 1);
+  display:inline-block;
 }
-.col-centered{
-  float: none;
-  margin: 0 auto;
+h2{
+  text-align:center;
+  position:relative;
+  z-index:2;
 }
-.top-buffer {
-  margin-top:210px;
-  margin-bottom:230px;
+h2:after{
+  content:"";
+  position:absolute;
+  top:50%;
+  left:0;
+  right:0;
+  border-top:solid 1px RGBA(255, 255, 255, 1);
+  z-index:-1;
 }
-.bottom-buffer {
-  margin-top:210px;
-  margin-bottom:300px;
+.nav-username{
+  color: white;
 }
-tr:nth-child(even){
-    background-color: rgba(132, 189, 0, .4);
+/* ============================================================
+  Plalists
+============================================================ */
+.content-offest{
+  padding-left: 240px;
 }
-a {
-    color: #84bd00;
+/* ============================================================
+  Text
+============================================================ */
+h4 {
+  font-size: 5px;
 }
-a:hover {
-    background-color: rgba(34,34,34,0.75);
-    color: rgba(132, 189, 0, .7);
-}
-tr {
-width: 100%;
-display: inline-table;
-}
-
-table{
- height:300px;
- color: rgba(34,34,34,0.75);
-}
-
-tbody{
-  overflow-y: scroll;
-  height: 150%;
-  width: 90%;
-  position: absolute;
+h1{
+  font-family: 'Candal', sans-serif;
 }
