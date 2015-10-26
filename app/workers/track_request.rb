@@ -5,6 +5,7 @@ class TrackRequest
     found_playlist = Playlist.find playlist_id
     found_user = User.find user_id
     offset = 0
+    counter_index = 0
     spotifty_playlist_tracks = get_playlist_tracks(offset,found_user.spotify_user_id, found_user.spotify_auth_token, found_playlist.spotify_playlist_id)
     while spotifty_playlist_tracks['total'] >= 100 + offset
       offset += 100
@@ -12,11 +13,10 @@ class TrackRequest
     end
     if spotifty_playlist_tracks['total'] != 0
       spotifty_playlist_tracks['items'].each do |track|
-        puts counter_index
         found_track = found_playlist.tracks.where(name:track['track']['name'],spotify_track_id:track['track']['id']).first
         if found_track
           playlist_tracks = PlaylistTrack.where(track_id:found_track.id,playlist_id:playlist_id).last
-          PlaylistTrack.create(track_id:found_track.id, playlist_id:playlist_id, positions:playlist.track.count, copies:playlist_tracks.copies + 1 )
+          PlaylistTrack.create(track_id:found_track.id, playlist_id:playlist_id, positions:playlist_tracks.count, copies:playlist_tracks.copies + 1 )
         else
           found_track = Track.where(spotify_track_id:track['track']['id']).first
           if found_track
@@ -25,7 +25,7 @@ class TrackRequest
             found_track = found_playlist.tracks.create(name:track['track']['name'], spotify_track_id:track['track']['id'])
           end
           playlist_tracks = PlaylistTrack.where(track_id:found_track.id,playlist_id:found_playlist.id).first
-          PlaylistTrack.update(playlist_tracks.id, {copies:0, positions:playlist.track.count})
+          PlaylistTrack.update(playlist_tracks.id, {copies:0, positions:playlist_tracks.copies})
         end
         track['track']['artists'].each do |artist|
           found_artist = Artist.where(name:artist['name'], spotify_artist_id:artist['id']).first_or_create
@@ -37,7 +37,7 @@ class TrackRequest
           found_album.update_attributes(image_url: image)
           found_artist.albums << found_album unless found_artist.albums.where(id:found_album.id).first
         end
-
+        counter_index += 1
       end
     end
   end
