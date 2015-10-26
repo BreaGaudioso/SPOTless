@@ -29,8 +29,8 @@
                   <td class='tablePlaylists'><%= playlist.name%></td>
                   <td class='tableDelete'><%= link_to 'delete', track_path(playlist.id, track.id), method: 'delete', :class => "material-icons"%></td>
                 </tr>
-                    <% end %>
                 <% i += 1 %>
+                    <% end %>
               <% end %>
             </tbody>
           </table>
