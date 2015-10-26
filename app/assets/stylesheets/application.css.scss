@@ -56,6 +56,27 @@ h2:after{
 .content-offest{
   padding-left: 240px;
 }
+.list-text {
+  margin-top: 0px;
+}
+#nav-username{
+  color: white;
+  font-size: 20px;
+  text-transform: uppercase;
+}
+
+a#delete-link:hover {
+  color: #ffd8a6;
+}
+a#delete-link  {
+  color: #ffab40;
+  -webkit-transition: color .3s ease;
+  -moz-transition: color .3s ease;
+  -o-transition: color .3s ease;
+  -ms-transition: color .3s ease;
+  transition: color .3s ease;
+  text-transform: uppercase;
+}
 /* ============================================================
   Text
 ============================================================ */
@@ -64,3 +85,4 @@ h4 {
 }
 h1{
   font-family: 'Candal', sans-serif;
+}

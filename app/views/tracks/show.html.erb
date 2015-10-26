@@ -1,0 +1,41 @@
+<div class="container content-offest">
+  <div class="card">
+    <div class="container">
+      <div class="row">
+        <div class="col s12">
+          <h3><%= @track.name%></h3>
+        </div>
+      </div>
+      <div class = "row">
+        <div class = 'col s12'>
+          <table class="highlight">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Name</th>
+                <th>Album</th>
+                <th>Playlists</th>
+                <th>Delete</th>
+              </tr>
+            </thead>
+            <tbody>
+              <% i = 1 %>
+              <% @matches.each do |track| %>
+                <% track.playlists.each do |playlist|%>
+                <tr>
+                  <td class='tableIndex'><%= i %></td>
+                  <td class='tableTrackName'><%= track.name%></td>
+                  <td class='tableAlbumName'><%= track.album.name%></td>
+                  <td class='tablePlaylists'><%= playlist.name%></td>
+                  <td class='tableDelete'><%= link_to 'delete', track_path(playlist.id, track.id), method: 'delete', :class => "material-icons"%></td>
+                </tr>
+                    <% end %>
+                <% i += 1 %>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>

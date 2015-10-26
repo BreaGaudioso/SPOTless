@@ -1,7 +1,7 @@
 </br></br>
 <div class="container content-offest">
   <div class="row">
-    <div class="col s6">
+    <div class="col s6 offset-s3">
      <div class="card #424242 grey darken-3">
        <div class="card-content white-text">
          <span class="card-title"><h3>Welcome</h3></span>
@@ -14,5 +14,42 @@
        </div>
      </div>
     </div>
-   </div>
+  </div>
+  <div class="row">
+    <div class="col s12">
+     <div class="card">
+       <div class="card-content ">
+         <span class="card-title black-text"><h4>All Songs</h4></span>
+         <table class="highlight">
+           <thead>
+             <tr>
+               <th>#</th>
+               <th>Name</th>
+               <th>Album</th>
+               <th>Artist</th>
+             </tr>
+           </thead>
+            <tbody>
+             <% i = 1 %>
+             <% @user.playlists.each do |playlist|%>
+               <% playlist.playlist_tracks.each do |track| %>
+                 <tr>
+                   <td class='tableIndex'><%= i %></td>
+                   <td class='tableTrackName'><%= link_to track.track.name, track_path(track.track.id)%></td>
+                   <td class='tableArtistName'>
+                     <%track.track.artists.each do |artist| %>
+                       <%=artist.name%>
+                     <% end %>
+                   </td>
+                   <td class='tableAlbumName'><%= track.track.album.name%></td>
+                 </tr>
+                 <% i += 1 %>
+               <% end %>
+              <% end %>
+            </tbody>
+          </table>
+        </div>
+      </div>
+    </div>
+  </div>
 </div>

@@ -9,13 +9,14 @@
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/css/materialize.min.css">
   <script src="https://cdnjs.cloudflare.com/ajax/libs/materialize/0.97.1/js/materialize.min.js"></script>
   <link href='https://fonts.googleapis.com/css?family=Poiret+One|Candal' rel='stylesheet' type='text/css'>
+    <link href="https://fonts.googleapis.com/icon?family=Material+Icons" rel="stylesheet">
 </head>
 <header>
 </header>
 <body>
   <% if @current_user %>
     <ul id="slide-out" class="side-nav fixed #212121 grey darken-4">
-      <h5 class='nav-username'>&nbsp;&nbsp;&nbsp;<%=@user.spotify_user_id.titlecase%></h5>
+      <%= link_to @user.username, user_path(@user), :id =>'nav-username' %>
       <li>
         <%= link_to "#{image_tag('logoutbutton.png')}".html_safe, logout_path, class:'col-sm-10 col-sm-offset-1' %>
       </li>
@@ -28,7 +29,9 @@
                 <% @user.playlists.each do |playlist| %>
                   <% if playlist.has_dup %>
                     <li class="dup">
-                      <%=link_to playlist.name, playlist_path(playlist)%>
+                      <pre>
+                        <%=link_to playlist.name, playlist_path(playlist)%>
+                      </pre>
                     </li>
                   <% end %>
                 <% end %>
@@ -44,8 +47,10 @@
             <div class="collapsible-body">
               <ul>
                 <% @user.playlists.each do |p| %>
-                  <li class="all">
-                    <%= link_to p.name, playlist_path(p) %>
+                  <li>
+                    <pre class="list-text">
+                      <%= link_to p.name, playlist_path(p) %>
+                    </pre>
                   </li>
                 <%end %>
               </ul>

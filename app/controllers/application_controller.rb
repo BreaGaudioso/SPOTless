@@ -6,6 +6,11 @@ class ApplicationController < ActionController::Base
 
   end
 
+  def current_spotify_user
+    return unless session[:spotify_user]
+  end
+    helper_method :current_spotify_user
+
   def current_user
     return unless session[:user_id]
     @current_user ||=User.find session[:user_id]

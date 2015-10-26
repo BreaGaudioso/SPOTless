@@ -6,5 +6,5 @@
   get 'loading', to: 'application#loading'
   resources :users, only: ['show', 'destroy']
   resources :playlists, only: ['show', 'edit', 'destroy']
-
+  resources :tracks, only:['show', 'destroy']
 end

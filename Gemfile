@@ -31,6 +31,7 @@ gem 'json'
 gem 'rspotify'
 gem 'devise'
 gem 'omniauth'
+gem 'fuzzy-string-match'
 # Use Unicorn as the app server
 # gem 'unicorn'
 

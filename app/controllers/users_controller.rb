@@ -7,8 +7,7 @@ class UsersController < ApplicationController
 
   def show
     user
-    @user
-    binding.pry
+    @user = user
   end
 
   def destroy
@@ -23,12 +22,13 @@ class UsersController < ApplicationController
       positionsArray.each do |song|
         song.destroy
       end
+      playlist.remove_tracks!(positions, snapshot_id:s_id)
     end
-    playlist.remove_tracks!(positions, snapshot_id:s_id)
     redirect_to user_path(@areplaylist.user.id)
   end
 
   def spotify
+    session[:spotify_user] = RSpotify::User.new(request.env['omniauth.auth'])
     found_user = User.where(spotify_user_id:request.env['omniauth.auth'].info.id).first_or_create
     if request.env['omniauth.auth'].info.display_name.present?
       userName = request.env['omniauth.auth'].info.display_name
@@ -45,28 +45,6 @@ class UsersController < ApplicationController
 private
   def user
     @user ||=current_user
-  end
-
-  def get_users_playlist(offset)
-    req =  Typhoeus::Request.new("https://api.spotify.com/v1/users/#{request.env['omniauth.auth'].info.id}/playlists/?offset=#{offset}&limit=50",
-      method: :get,
-      headers: {
-        Accept: "application/json",
-        Authorization: "Bearer #{request.env['omniauth.auth'].credentials.token}"
-      })
-      res = req.run
-      JSON.parse(res.options[:response_body])
-  end
-
-  def get_playlist_tracks(offset, playlist_id)
-    req =  Typhoeus::Request.new("https://api.spotify.com/v1/users/#{request.env['omniauth.auth'].info.id}/playlists/#{playlist_id}/tracks?offset=#{offset}&limt=100",
-      method: :get,
-      headers: {
-        Accept: "application/json",
-        Authorization: "Bearer #{request.env['omniauth.auth'].credentials.token}"
-      })
-      res = req.run
-      json_res = JSON.parse(res.options[:response_body])
   end
 
   def areplaylists
