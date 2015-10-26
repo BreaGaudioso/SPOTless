@@ -3,8 +3,9 @@
     <div class="container">
       <div class = "row">
         <div class = 'col s12'>
+          <br>
           <% if @areplaylist.has_dup %>
-            <h3><%= link_to 'Remove Duplicates', playlist_path, method: 'delete', :id => 'delete-link'  %></h3>
+            <%= link_to 'Remove Duplicates', playlist_path, method: 'delete', :id => 'delete-link', :class => 'waves-effect waves-light btn #7cb342 light-green darken-1 white-text' %>
           <% end %>
         </div>
       </div>
