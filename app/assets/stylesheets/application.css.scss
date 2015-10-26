@@ -29,7 +29,7 @@
 }
 .line-center{
   margin:0;padding:0 10px;
-  background:RGBA(0, 0, 0, 1);
+    background:RGBA(0, 0, 0, 1);
   color: RGBA(255, 255, 255, 1);
   display:inline-block;
 }
@@ -51,7 +51,7 @@ h2:after{
   color: white;
 }
 /* ============================================================
-  Plalists
+  Playlists
 ============================================================ */
 .content-offest{
   padding-left: 240px;
@@ -76,6 +76,9 @@ a#delete-link  {
   -ms-transition: color .3s ease;
   transition: color .3s ease;
   text-transform: uppercase;
+}
+#logout-image:hover {
+  background: RGBA(33, 33, 33, 1);
 }
 /* ============================================================
   Text

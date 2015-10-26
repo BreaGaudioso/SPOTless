@@ -33,8 +33,11 @@ require 'rspotify'
     positionsArray = areplaylist.playlist_tracks.where(track_id:t_id)
     positions = positionsArray.pluck(:positions).map(&:to_i)
     playlist.remove_tracks!(positions, snapshot_id:s_id)
-    session[:spotify_user].remove_tracks!(positions, snapshot_id:s_id)
-    redirect_to user_path(@areplaylist.user.id)
+    Post.find_each { |post| Post.reset_counters(song.id, :positions) }
+    positionsArray.each do |song|
+      song.destroy
+    end
+    redirect_to user_path(current_user)
   end
 
 
