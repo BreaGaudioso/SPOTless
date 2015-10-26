@@ -12,16 +12,18 @@ class UsersController < ApplicationController
 
   def destroy
     areplaylists.each do |areplaylist|
-      p_id = areplaylist.spotify_playlist_id
-      u_id = current_user.spotify_user_id
-      s_id = areplaylist.snap_shot_id
-      playlist = RSpotify::Playlist.find(u_id, p_id)
-      positionsArray = areplaylist.playlist_tracks.where("copies > 0")
-      positions = positionsArray.pluck(:positions).map(&:to_i)
-      positionsArray.each do |song|
-        song.destroy
+      positions = []
+      positions.push(areplaylist.playlist_tracks.where("copies > 0"))
+      if positions.flatten.length > 0
+        p_id = areplaylist.spotify_playlist_id
+        u_id = current_user.spotify_user_id
+        s_id = areplaylist.snap_shot_id
+        playlist = RSpotify::Playlist.find(u_id, p_id)
+        positions.each do |song|
+          song[0].destroy
+          playlist.remove_tracks!(song.pluck(:positions).map(&:to_i), snapshot_id:s_id)
+        end
       end
-      playlist.remove_tracks!(positions, snapshot_id:s_id)
     end
     redirect_to user_path(current_user)
   end
