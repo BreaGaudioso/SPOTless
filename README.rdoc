@@ -1,3 +1,0 @@
-Spotless shows you which of your playlsts have duplicates, and lets you delete duplicates from each playlist with a click of a button.
-
-This project was made with Ruby on Rails using the Spotify API, Redis and Sidekiq. 
